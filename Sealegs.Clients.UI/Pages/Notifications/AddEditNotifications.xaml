@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:ui="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             xmlns:model="clr-namespace:Sealegs.Clients.UI.Controls;assembly=Sealegs.Clients.UI"
+             xmlns:xfControls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             x:Class="Sealegs.Clients.UI.AddEditNotificationPage"
+             Title="{Binding PageTitle}"
+             BackgroundColor="{x:DynamicResource WindowBackgroundTable}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <model:JoinListConverter x:Key="JoinListConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ui:CardView HasShadow="True" Margin="15,2,15,2" 
+                     VerticalOptions="CenterAndExpand"
+                     AbsoluteLayout.LayoutFlags="All"
+                     AbsoluteLayout.LayoutBounds="0,0, 1, 1">
+                <StackLayout Margin="0,10,0,0">
+                    <Entry Placeholder="Name" Text="{Binding Notification.Text}" />
+
+                    <DatePicker Date="{Binding Notification.Date}"/>
+
+                    <Label Text="Select Roles" TextColor="Gray" FontAttributes="Bold" Margin="10,0,0,0"></Label>
+                    <ScrollView HeightRequest="200" Orientation="Vertical" IsClippedToBounds="True">
+                        <xfControls:Repeater ItemsSource="{Binding Roles}" ItemTaped="Repeater_OnItemTapped" Orientation="Vertical" x:Name="RolesRepeater"
+                                        IsClippedToBounds="True">
+                            <xfControls:Repeater.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding RoleName}" TextColor="{StaticResource PrimaryDark}" Margin="10,0,0,0"
+                                              HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="15"/>
+                                            <Image Source="tick.png" HorizontalOptions="EndAndExpand" Margin="0,3,15,3" VerticalOptions="CenterAndExpand"
+                                              IsVisible="{Binding IsSelected}" HeightRequest="15" WidthRequest="15" />
+                                        </StackLayout>
+                                        <Label BackgroundColor="Gray" HorizontalOptions="FillAndExpand" HeightRequest="1"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </xfControls:Repeater.ItemTemplate>
+                        </xfControls:Repeater>
+                    </ScrollView>
+                    <Button HeightRequest="45"  Margin="10" TextColor="White" Text="{Binding ButtonName}" 
+                        BackgroundColor="#7635A0" Command="{Binding SaveCommand}"/>
+
+                    <Button HeightRequest="45"  Margin="10"  TextColor="White" Text="Cancel" 
+                        BackgroundColor="#ff8080"  Command="{Binding CancelCommand}"/>
+                </StackLayout>
+            </ui:CardView>
+            <StackLayout IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="PositionProportional"
+                     AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                <StackLayout.Orientation>
+                    <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+                </StackLayout.Orientation>
+                <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                    <ActivityIndicator.Color>
+                        <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                    </ActivityIndicator.Color>
+                </ActivityIndicator>
+                <Label Text="Loading.." HorizontalOptions="Center" Style="{DynamicResource EvolveListItemTextStyle}"/>
+            </StackLayout>
+        </AbsoluteLayout>
+
+    </ContentPage.Content>
+</pages:PopupPage>

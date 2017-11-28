@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sealegs.Clients.UI.Pages.Android.Menu.Master"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+                  Padding="{StaticResource Paddingios}">
+    <MasterDetailPage.Master >
+        <ContentPage Title="Default" BackgroundColor="#F5F5F5" Padding="{StaticResource Paddingios}" Icon="menu.png">
+            <StackLayout>
+                <ListView x:Name="MenuItemsListView" SeparatorVisibility="None"
+                          HasUnevenRows="true">
+                    <ListView.Header>
+                        <Grid RowSpacing="0" HeightRequest="150">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions> 
+                            <Image Grid.Row="0" Grid.RowSpan="2" 
+                                   Source="master_page_pic.png" Aspect="AspectFill"/>
+                            <abstractions:CircleImage Grid.Row="0" Grid.Column="0" Source="{Binding ProfilePath}" Aspect="AspectFill"
+                                                      HeightRequest="100" WidthRequest="100" BorderColor="Purple"  HorizontalOptions="StartAndExpand"
+                                                      Margin="15,0,15,0">
+                                <abstractions:CircleImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ProfileCommand}"></TapGestureRecognizer>
+                                </abstractions:CircleImage.GestureRecognizers>
+                            </abstractions:CircleImage>
+                            <Label Grid.Row="1" Text="{Binding Username}" TextColor="White"
+                                   Margin="15,0,15,0" FontAttributes="Bold" FontSize="20">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding UserSignInCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                    <Image Source="{Binding Icon}" VerticalOptions="Center"
+                                           HeightRequest="20" WidthRequest="20" HorizontalOptions="Start"/>
+                                    <Label VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Start" TextColor="Gray"
+                                           Text="{Binding Title}" FontSize="16"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+  
+</MasterDetailPage>

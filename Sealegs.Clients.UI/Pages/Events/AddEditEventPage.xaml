@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ui="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             x:Class="Sealegs.Clients.UI.Pages.Events.AddEditEventPage"
+             Title="AddEditEventPage"
+             Padding="0,20">
+    <ScrollView>
+        <StackLayout>
+            <ui:CardView CornerRadius="5">
+                <StackLayout Margin="20,5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Entry Text="{Binding Event.Title}" Placeholder="News Title"></Entry>
+                    <Entry Text="{Binding Event.Description}" Placeholder="Description"></Entry>
+                    <DatePicker Date="{Binding Event.StartTime}"></DatePicker>
+                    <DatePicker Date="{Binding Event.EndTime}" ></DatePicker>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Is All Day" TextColor="Gray" VerticalOptions="CenterAndExpand"/>
+                        <Switch IsToggled="{Binding Event.IsAllDay}" VerticalOptions="CenterAndExpand" Margin="5,0"/>
+                    </StackLayout>
+                    <Entry Text="{Binding Event.LocationName}" Placeholder="Rank"></Entry>
+                </StackLayout>
+            </ui:CardView>
+            <Button TextColor="White" Text="{Binding ButtonName}" BackgroundColor="{StaticResource Primary}"
+                    Command="{Binding AddCommand}"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

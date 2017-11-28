@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ui="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             x:Class="Sealegs.Clients.UI.Pages.News.AddEditNewspage"
+             Title="{Binding PageTitle}">
+    <ScrollView>
+        <StackLayout>
+            <ui:CardView CornerRadius="5">
+                <StackLayout Margin="20,5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Entry Text="{Binding News.Name}" Placeholder="News Title"></Entry>
+                    <Entry Text="{Binding News.Description}" Placeholder="Description"></Entry>
+                    <Entry Text="{Binding News.ImageUrl}" Placeholder="ImageUrl"></Entry>
+                    <Entry Text="{Binding News.WebsiteUrl}" Placeholder="WebsiteUrl"></Entry>
+                    <Entry Text="{Binding News.TwitterUrl}" Placeholder="News Title"></Entry>
+                    <Entry Text="{Binding News.Rank}" Placeholder="Rank"></Entry>
+                </StackLayout>
+            </ui:CardView>
+            <Button TextColor="White" Text="{Binding ButtonName}" BackgroundColor="{StaticResource Primary}"
+                    Command="{Binding AddCommand}"/>
+        </StackLayout>
+    
+        <!--<StackLayout>
+            <Label VerticalTextAlignment="Center"  HorizontalTextAlignment="Center" 
+                   TextColor="White" FontAttributes="Bold" BackgroundColor="#7635EB" 
+                   HeightRequest="55" Text="{Binding PageName}"></Label>
+
+            <ui:CardView HasShadow="True" Padding="5,2,0,2" 
+                     VerticalOptions="CenterAndExpand">
+                <Grid Padding="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="2" Grid.Column="0" Text="Title"/>
+                    <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Title}"/>
+ 
+                    <Label Grid.Row="4" Grid.Column="0" Text="Sub Title"/>
+                    <Entry Grid.Row="4" Grid.Column="1" Text="{Binding SubTitle}"/>
+
+                    <Label Grid.Row="6" Grid.Column="0" Text="Description"/>
+                    <Editor Grid.Row="6" Grid.Column="1" Text="{Binding News}"/>
+
+                    <Grid  Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="{Binding RowHeight}"/> 
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Refrences"
+                         Grid.Row="0"
+                         Grid.Column="0"/>
+                        <ListView Grid.Row="1" 
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            HasUnevenRows="False"
+                            ItemsSource="{Binding LinksList}"
+                             x:Name="MyLinksList"   
+                             SeparatorVisibility="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout>
+                                            <Grid x:Name="Item">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="40"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding Name}"
+                                                       Grid.Column="0"
+                                                       VerticalTextAlignment="Center"
+                                                       VerticalOptions="CenterAndExpand"/>
+                                                <Label Text="{Binding Url}"
+                                                        Grid.Column="1"
+                                                        VerticalTextAlignment="Center"
+                                                       VerticalOptions="CenterAndExpand"/>
+                                                <Image Source="Delete.png"
+                                                       Grid.Column="2">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer BindingContext="{Binding Source={x:Reference MyLinksList}, Path=BindingContext}"
+                                                                              Command="{Binding DeleteCommand}"
+                                                                              CommandParameter="{Binding Source={x:Reference Item},Path=BindingContext}" />
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </Grid>
+                                            <Label HeightRequest="1"
+                                                   BackgroundColor="Black"
+                                                   HorizontalOptions="FillAndExpand"/>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                        <Label Text="Name"  
+                               Grid.Row="2"
+                               Grid.Column="0"/>
+                        <Label Text="Link Url"  
+                                Grid.Row="2"
+                               Grid.Column="1"/>
+
+                        <Entry Text="{Binding LinkName}"
+                               Grid.Row="3"
+                               Grid.Column="0"/>
+                        <Entry Text="{Binding LinkUrl}"
+                               Grid.Row="3"
+                               Grid.Column="1"/>
+                        <Button Text="Add"
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                HeightRequest="45" 
+                                Margin="10" 
+                                TextColor="White"
+                                BackgroundColor="#7635A0"
+                                Command="{Binding AddLinkCommand}"/>
+                    </Grid>
+
+
+                    <Button HeightRequest="45" 
+                        Margin="10" 
+                        TextColor="White"
+                        Text="Save" 
+                        BackgroundColor="#7635A0"
+                        Grid.Row="10"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"/>
+
+                    <Button HeightRequest="45" 
+                        Margin="10"  
+                        TextColor="White"
+                        Text="Cancel" 
+                        BackgroundColor="#ff8080" 
+                        Command="{Binding CancelCommand}"
+                        Grid.Row="11"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"/>
+
+
+                </Grid>
+            </ui:CardView>
+        </StackLayout>-->
+    </ScrollView>
+
+</ContentPage>

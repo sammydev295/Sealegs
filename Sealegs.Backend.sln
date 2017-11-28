@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sealegs.Backend", "Sealegs.Backend\Sealegs.Backend.csproj", "{209FA716-A7AD-4095-BD70-C8710FC66FA7}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Sealegs.DataObjects", "Sealegs.DataObjects\Sealegs.DataObjects.shproj", "{7EDD0E09-3B40-41AB-83DD-01317426CA1A}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Sealegs.DataObjects\Sealegs.Backend.Shared.projitems*{209fa716-a7ad-4095-bd70-c8710fc66fa7}*SharedItemsImports = 4
+		Sealegs.DataObjects\Sealegs.Backend.Shared.projitems*{7edd0e09-3b40-41ab-83dd-01317426ca1a}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://drdev-development.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Sealegs.DataObjects\\Sealegs.DataObjects.shproj
+		SccProjectName1 = Sealegs.DataObjects
+		SccLocalPath1 = Sealegs.DataObjects
+		SccProjectUniqueName2 = Sealegs.DataObjects\\Sealegs.Backend.Shared.projitems
+		SccProjectTopLevelParentUniqueName2 = Sealegs.DataObjects\\Sealegs.DataObjects.shproj
+		SccProjectName2 = Sealegs.DataObjects
+		SccLocalPath2 = Sealegs.DataObjects
+		SccProjectUniqueName3 = Sealegs.Backend\\Sealegs.Backend.csproj
+		SccProjectName3 = Sealegs.Backend
+		SccLocalPath3 = Sealegs.Backend
+	EndGlobalSection
+EndGlobal

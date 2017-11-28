@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Sealegs.Clients.UI.CheckOutFinal"
+             Title="Confirm Checkout"
+             NavigationPage.BackButtonTitle="Back"
+             BackgroundColor="{x:DynamicResource WindowBackgroundTable}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" ItemsSource="{Binding SelectedWines}"
+             x:Name="lstWines">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <ViewCell>
+                        <Grid BackgroundColor="#63CF9C" Padding="10,0,10,0" x:Name="grdItem">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <ff:CachedImage Grid.Column="0" HeightRequest="100" WidthRequest="100"
+                              Aspect="AspectFit" DownsampleHeight="100" DownsampleUseDipUnits="false"
+                              LoadingPlaceholder="loading.png"
+                              ErrorPlaceholder="error.png"
+                              Source="{Binding ImagePath}" />
+                            <Label Text="{Binding WineTitle}" Grid.Column="1" FontSize="15" VerticalOptions="CenterAndExpand">
+                            </Label>
+                            <Grid Grid.Column="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="sub.png" Grid.Column="0">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding RemoveQuantityCommand}"
+                                                              BindingContext="{Binding Source={x:Reference lstWines}, Path=BindingContext}"
+                                                              CommandParameter="{Binding Source={x:Reference grdItem},Path=BindingContext}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label Text="{Binding CheckoutQuantity}" Grid.Column="1"
+                                       TextColor="Gray"
+                                       BackgroundColor="White" WidthRequest="100"
+                                       HeightRequest="100" Margin="0,10,0,10" HorizontalTextAlignment="Center"
+                                       FontSize="20" FontAttributes="Bold"></Label>
+                                <Image Source="add.png" Grid.Column="2" >
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding AddQuantityCommand}"
+                                                              BindingContext="{Binding Source={x:Reference lstWines}, Path=BindingContext}"
+                                                              CommandParameter="{Binding Source={x:Reference grdItem}, Path=BindingContext}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button  Grid.Row="1" Text="Proceed With Checkout" Command="{Binding CheckOutCommand}"
+                    Style="{StaticResource LockerDetailsButtonStyle}"/>
+    </Grid>
+</ContentPage>

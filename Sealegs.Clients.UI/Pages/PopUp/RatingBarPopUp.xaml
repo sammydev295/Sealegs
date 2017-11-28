@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:xfControls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             x:Class="Sealegs.Clients.UI.Pages.PopUp.RatingBarPopUp">
+    <ContentPage.Content>
+        <StackLayout HeightRequest="100"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+           
+                <xfControls:Repeater Orientation="Horizontal" ItemsSource="{Binding RatingCountList}" ItemTaped="Repeater_OnItemTaped">
+                    <xfControls:Repeater.ItemTemplate>
+                        <DataTemplate>
+                        <Image Source="{Binding StarImage}" HeightRequest="50" WidthRequest="50"
+                                   Aspect="AspectFit" VerticalOptions="CenterAndExpand"/>
+                        </DataTemplate>
+                    </xfControls:Repeater.ItemTemplate>
+                </xfControls:Repeater>
+          
+            <Button Text="Cancel" TextColor="White" BackgroundColor="{StaticResource PrimaryDark}" Command="{Binding CancelCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</pages:PopupPage>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ui="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             xmlns:xfControls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             x:Class="Sealegs.Clients.UI.Pages.Evaluation.WineEvaluation">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ui:RatingConverter x:Key="RatingConverter"  />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ListView ItemsSource="{Binding FeedbackList}"  x:Name="ChillRequestList" IsPullToRefreshEnabled="True"
+                      BackgroundColor="White"  IsVisible="{Binding ListVisibilty}" HasUnevenRows="True"
+                      ItemSelected="ListView_OnItemSelected" ItemTapped="ListView_OnItemTapped"
+                      CachingStrategy="RecycleElement" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsListBusy}"
+                      AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <ListView.SeparatorColor>
+                    <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" WinPhone="{StaticResource ListSeparator}"/>
+                </ListView.SeparatorColor>
+       
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ui:CardView HasShadow="True" CornerRadius="5" x:Name="Item" Margin="0,5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="3*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="1" Spacing="0" Margin="10,5,0,5"  VerticalOptions="CenterAndExpand">
+                                        <Label Text="{Binding Wine.WineTitle}" TextColor="Gray" FontAttributes="Bold" />
+                                        <Label Text="{Binding Feedback.Rating,Converter={StaticResource RatingConverter}}" TextColor="Gray" ></Label>
+                                        <Label Text="{Binding Wine.Vintage,StringFormat='Vintage: {0}'}" TextColor="Gray"/>
+                                        <Label Text="{Binding Wine.BottleSize,StringFormat='Bottle Size: {0}'}" TextColor="Gray"/>
+                                    </StackLayout>
+                                    <Image Grid.Column="0" Source="{Binding Wine.ImagePath}" Aspect="AspectFill" />
+                                </Grid>
+                            
+                            </ui:CardView>
+                        </ViewCell>
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+            </ListView>
+
+      
+            <StackLayout IsVisible="{Binding NoWinesFound}"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="CenterAndExpand"
+                         AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         BackgroundColor="{x:DynamicResource WindowBackground}"
+                         Padding="16,0">
+                <Label Text="No Chill Request Available" HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"
+                       FontSize="22" TextColor="#D3D2D2"/>
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding IsBusy}"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                <StackLayout.Orientation>
+                    <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+                </StackLayout.Orientation>
+                <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                    <ActivityIndicator.Color>
+                        <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                    </ActivityIndicator.Color>
+                </ActivityIndicator>
+                <Label Text="Loading Requests..." HorizontalOptions="Center" Style="{x:DynamicResource EvolveListItemTextStyle}"/>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

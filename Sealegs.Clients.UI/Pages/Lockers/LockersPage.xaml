@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+    xmlns:controls="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+    xmlns:controls1="clr-namespace:Sealegs.Clients.UI.Controls;assembly=Sealegs.Clients.UI"
+    x:Class="Sealegs.Clients.UI.LockersPage"
+    Title="{Binding PageTitle}"
+    Icon="tab_lockers.png">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="toolbar_events.png" Text="Last Accessed" Command="{Binding FilterLastUsedCommand}" />
+        <ToolbarItem Icon="toolbar_heart_empty.png" Text="Favorites Only" Command="{Binding FilterFavoritesCommand}" />
+        <ToolbarItem Icon="toolbar_filter.png" Text="InActive Only" Command="{Binding FilterInActiveCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <StackLayout>
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness" Android="0,8,8,8" iOS="0" WinPhone="0"/>
+            </StackLayout.Padding>
+            <StackLayout.BackgroundColor>
+                <OnPlatform x:TypeArguments="Color" Android="{StaticResource Primary}"/>
+            </StackLayout.BackgroundColor>
+            <SearchBar Text="{Binding SearchFilter, Mode=TwoWay}" 
+                       Placeholder="Search"
+                       SearchCommand="{Binding SearchLockersCommand}"
+                       FontSize="Small" >
+                <SearchBar.PlaceholderColor>
+                    <OnPlatform x:TypeArguments="Color" Android="White"/>
+                </SearchBar.PlaceholderColor>
+                <SearchBar.BackgroundColor>
+                    <OnPlatform x:TypeArguments="Color" Android="{StaticResource Primary}"/>
+                </SearchBar.BackgroundColor>
+                <SearchBar.TextColor>
+                    <OnPlatform x:TypeArguments="Color" Android="White"/>
+                </SearchBar.TextColor>
+                <SearchBar.CancelButtonColor>
+                    <OnPlatform x:TypeArguments="Color" Android="White" iOS="{StaticResource Primary}"/>
+                </SearchBar.CancelButtonColor>
+            </SearchBar>
+        </StackLayout>
+        <AbsoluteLayout  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                         BackgroundColor="#dfdfdf">
+            <!-- Lockers -->
+            <controls:FlowListView x:Name="ListViewLockers" SeparatorVisibility="None" HasUnevenRows="true"
+                                   FlowItemTapped="OnLockerSelected" FlowColumnMinWidth="110" FlowItemsSource="{Binding LockersFiltered}"
+                                   IsVisible="{Binding LockersFound}" IsPullToRefreshEnabled="{Binding IsNotBusy}"
+                                   RefreshCommand="{Binding ForceRefreshCommand}" IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                                   BackgroundColor="#dfdfdf" SelectedItem="{Binding SelectedLocker}" 
+                                   AbsoluteLayout.LayoutFlags="XProportional,WidthProportional,HeightProportional"
+                                   AbsoluteLayout.LayoutBounds="0,10,1,1"
+                                   Margin="5,0,5,0">
+                <controls:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <local:LockerCell/>
+                    </DataTemplate>
+                </controls:FlowListView.FlowColumnTemplate>
+            </controls:FlowListView>
+
+            <!--Loading-->
+            <StackLayout IsVisible="{Binding IsBusy}"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                <StackLayout.Orientation>
+                    <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+                </StackLayout.Orientation>
+                <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                    <ActivityIndicator.Color>
+                        <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                    </ActivityIndicator.Color>
+                </ActivityIndicator>
+                <Label Text="Loading Lockers..." HorizontalOptions="Center" Style="{x:DynamicResource EvolveListItemTextStyle}"/>
+            </StackLayout>
+
+            <!--No Locker Found Message-->
+            <StackLayout IsVisible="{Binding NoLockersFound}" HorizontalOptions="FillAndExpand"
+                         VerticalOptions="CenterAndExpand" AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         BackgroundColor="{x:DynamicResource WindowBackground}"
+                         Padding="16,0">
+                <Label Text="{Binding NoLockersFoundMessage}" HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"
+                       FontSize="22" TextColor="#D3D2D2"/>
+            </StackLayout>
+
+            <!--New Locker-->
+            <controls1:ImageButton Source="{local:ImageResource Sealegs.Clients.UI.Images.add.png}" Style="{StaticResource DashboardImageStyle}"
+                                   VerticalOptions="EndAndExpand" BackgroundColor="Transparent" AbsoluteLayout.LayoutFlags="PositionProportional"
+                                   AbsoluteLayout.LayoutBounds="1,1, 150, 150" Command="{Binding AddCommand}">
+            </controls1:ImageButton>
+        </AbsoluteLayout>
+    </StackLayout>
+</ContentPage>

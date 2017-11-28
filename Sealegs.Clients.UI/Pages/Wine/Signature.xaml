@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sealegs.Clients.UI.Pages.Wine.Signature"
+             xmlns:signatureControl="clr-namespace:Acr.XamForms.SignaturePad;assembly=Acr.XamForms.SignaturePad"
+             Title="Signatures"
+             BackgroundColor="White">
+    <AbsoluteLayout>
+        <Grid  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  RowSpacing="0" BackgroundColor="White"
+               AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0"
+                   BackgroundColor="White"
+                   Text="Client Signature"
+                   VerticalTextAlignment="End"
+                   FontSize="15"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"/>
+            <signatureControl:SignaturePadView x:Name="ClientSignature" Grid.Row="1" BackgroundColor="White"
+                                               SignatureLineColor="Black" StrokeColor="Black" 
+                                               PromptTextColor="White" Unfocused="ClientSignature_OnUnfocused" />
+            <BoxView Grid.Row="2" BackgroundColor="White" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Label Grid.Row="3" Text="Manager Signature" VerticalTextAlignment="End"
+                   FontSize="15"  FontAttributes="Bold" BackgroundColor="White"
+                   HorizontalTextAlignment="Center"/>
+            <signatureControl:SignaturePadView x:Name="ManagerSignature" Grid.Row="4" BackgroundColor="White"
+                                               SignatureLineColor="Black" StrokeColor="Black" PromptTextColor="White"
+                                               Unfocused="ManagerSignature_OnUnfocused"/>
+            <BoxView Grid.Row="5" BackgroundColor="White" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <BoxView Grid.Row="6" BackgroundColor="White" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Grid.Row="6" Text="Submit"  Clicked="Button_OnClicked"
+                    Style="{StaticResource LockerDetailsButtonStyle}"/>
+
+        </Grid>
+        <StackLayout IsVisible="{Binding IsBusy}"
+                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                     AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+            <StackLayout.Orientation>
+                <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+            </StackLayout.Orientation>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                <ActivityIndicator.Color>
+                    <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                </ActivityIndicator.Color>
+            </ActivityIndicator>
+            <Label Text="Checking Out.." HorizontalOptions="Center" Style="{x:DynamicResource EvolveListItemTextStyle}"/>
+        </StackLayout>
+    </AbsoluteLayout>
+
+
+</ContentPage>

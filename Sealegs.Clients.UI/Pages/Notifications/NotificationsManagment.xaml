@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ui="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             xmlns:controls="clr-namespace:Sealegs.Clients.UI.Controls;assembly=Sealegs.Clients.UI"
+             x:Class="Sealegs.Clients.UI.NotificationsManagmentPage"
+             Title="Notifications Managment"
+             Padding="0,20">
+
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ListView ItemsSource="{Binding NotificationsList}" HasUnevenRows ="True"       IsVisible="{Binding ListVisibilty}"    
+                  CachingStrategy="RetainElement" AbsoluteLayout.LayoutFlags="All" 
+                  AbsoluteLayout.LayoutBounds="0,0,1,1" ItemTapped="ListView_OnItemTapped" ItemSelected="ListView_OnItemSelected">
+            <ListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" Android="Transparent"/>
+            </ListView.SeparatorColor>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Spacing="0" >
+                            <StackLayout.Padding>
+                                <OnPlatform x:TypeArguments="Thickness" iOS="0" Android="0,4" WinPhone="0"/>
+                            </StackLayout.Padding>
+                            <ui:CardView CornerRadius="5">
+                                <Grid Padding="16" ColumnSpacing="16" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Text}" VerticalTextAlignment="Center"
+                                           VerticalOptions="FillAndExpand" Grid.Column="0" TextColor="Gray"/>
+                                    <Label Text="{Binding Date}" VerticalTextAlignment="Center"
+                                           VerticalOptions="FillAndExpand" Grid.Column="1" TextColor="Gray"/>                                
+                                </Grid>
+                            </ui:CardView>
+                        </StackLayout>
+                        
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="PositionProportional"
+                     AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+            <StackLayout.Orientation>
+                <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+            </StackLayout.Orientation>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                <ActivityIndicator.Color>
+                    <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                </ActivityIndicator.Color>
+            </ActivityIndicator>
+            <Label Text="Loading Notifications..." HorizontalOptions="Center" Style="{DynamicResource EvolveListItemTextStyle}"/>
+        </StackLayout>
+        <controls:ImageButton Source="{ui:ImageResource Sealegs.Clients.UI.Images.add.png}"
+                              Style="{StaticResource DashboardImageStyle}" Command="{Binding AddCommand}"
+                              VerticalOptions="EndAndExpand" BackgroundColor="Transparent"
+                              AbsoluteLayout.LayoutFlags="PositionProportional"
+                              AbsoluteLayout.LayoutBounds="1,1, 150, 150">
+           
+        </controls:ImageButton>
+        <StackLayout IsVisible="{Binding NoNewsFound}" HorizontalOptions="FillAndExpand"
+                     VerticalOptions="CenterAndExpand" AbsoluteLayout.LayoutFlags="All"
+                     AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     BackgroundColor="{x:DynamicResource WindowBackground}"
+                     Padding="16,0">
+            <Label Text="{Binding NoLockersFoundMessage}" HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"
+                   FontSize="22" TextColor="#D3D2D2"/>
+        </StackLayout>
+    </AbsoluteLayout>
+
+</ContentPage>

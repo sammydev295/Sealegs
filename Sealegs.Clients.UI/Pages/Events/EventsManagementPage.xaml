@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+    x:Class="Sealegs.Clients.UI.EventsManagementPage"
+    xmlns:imagecircle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+    Title="Manage Events"
+    Icon="tab_events.png"
+    BackgroundColor="{x:DynamicResource WindowBackground}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:EventTimeDisplayConverter x:Key="EventTimeDisplayConverter" />
+            <local:EventDayNumberDisplayConverter x:Key="EventDayNumberDisplayConverter" />
+            <local:EventDayDisplayConverter x:Key="EventDayDisplayConverter" />
+            <local:EventColorDisplayConverter x:Key="EventColorDisplayConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid BackgroundColor="#7635EB" HeightRequest="40" ColumnSpacing="0" IsVisible="{Binding TopIsVisible}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Passed Events" Grid.Column="0" FontAttributes="Bold"
+                   TextColor="{Binding PassedTextColor}" 
+                   BackgroundColor="{Binding PassedBackgroundColor}"
+                   FontSize="20" WidthRequest="100"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PassedCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="Upcoming Events" Grid.Column="1" FontAttributes="Bold"
+                   TextColor="{Binding UpcomingTextColor}"
+                   BackgroundColor="{Binding UpcomingBackgroundColor}"
+                   FontSize="20" WidthRequest="100"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UpcomingCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+        <AbsoluteLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ListView x:Name="ListViewEvents" ItemsSource="{Binding EventsGrouped}"
+                      GroupDisplayBinding="{Binding Key}" IsGroupingEnabled="true"
+                      HasUnevenRows ="true" 
+                      CachingStrategy="RecycleElement" IsVisible="{Binding IsNotBusy}"
+                      StyleId="EventsPageIdentifier" AbsoluteLayout.LayoutFlags="All"
+                      AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="White" ItemSelected="ListViewEvents_OnItemSelected"
+                      ItemTapped="ListViewEvents_OnItemTapped">
+                <ListView.SeparatorColor>
+                    <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"  WinPhone="{StaticResource ListSeparator}"/>
+                </ListView.SeparatorColor>
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.Height>
+                                <OnPlatform x:TypeArguments="x:Double" iOS="28"/>
+                            </ViewCell.Height>
+                            <local:EvolveGroupHeaderView/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell StyleId="disclosure">
+                            <Grid Margin="{StaticResource StandardPadding}" ColumnSpacing="{StaticResource StandardSpacing}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding ImagePath}" HorizontalOptions="StartAndExpand" Aspect="AspectFill" 
+                                       WidthRequest="80"></Image>
+                                <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Title}" 
+                                           Style="{x:DynamicResource EvolveListItemTextStyle}" StyleId="EventItemTitle"/>
+                                    <Label Text="{Binding ., Converter={StaticResource EventTimeDisplayConverter}}" 
+                                           Style="{x:DynamicResource EvolveListItemDetailTextStyle}" StyleId="EventItemTime"/>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout IsVisible="{Binding IsBusy}"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                <StackLayout.Orientation>
+                    <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+                </StackLayout.Orientation>
+                <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                    <ActivityIndicator.Color>
+                        <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                    </ActivityIndicator.Color>
+                </ActivityIndicator>
+                <Label Text="Loading Events..." HorizontalOptions="Center" Style="{x:DynamicResource EvolveListItemTextStyle}"/>
+            </StackLayout>
+            <Image Source="{local:ImageResource Sealegs.Clients.UI.Images.add.png}"
+                   Style="{StaticResource DashboardImageStyle}"
+                   VerticalOptions="EndAndExpand" BackgroundColor="Transparent"
+                   AbsoluteLayout.LayoutFlags="PositionProportional"
+                   AbsoluteLayout.LayoutBounds="1,1, 150, 150">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AddCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+        </AbsoluteLayout>
+    </Grid>
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Icon="checkn.png" Clicked="SaveEvents_OnClicked" />
+    </ContentPage.ToolbarItems>-->
+    
+    <!--<ContentPage.Resources>
+        <ResourceDictionary>
+            <local:EventTimeDisplayConverter x:Key="EventTimeDisplayConverter" />
+            <local:EventDayNumberDisplayConverter x:Key="EventDayNumberDisplayConverter" />
+            <local:EventDayDisplayConverter x:Key="EventDayDisplayConverter" />
+            <local:EventColorDisplayConverter x:Key="EventColorDisplayConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ListView
+           x:Name="ListViewEvents"
+           ItemsSource="{Binding EventsGrouped}"
+           GroupDisplayBinding="{Binding Key}"
+           IsGroupingEnabled="true"
+           HasUnevenRows ="true"
+           IsPullToRefreshEnabled="{Binding IsNotBusy}"
+           RefreshCommand="{Binding ForceRefreshCommand}"
+           IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+           CachingStrategy="RecycleElement"
+           IsVisible="{Binding IsNotBusy}"
+           StyleId="EventsPageIdentifier"
+           AbsoluteLayout.LayoutFlags="All"
+           AbsoluteLayout.LayoutBounds="0,0,1,1"
+           BackgroundColor="White">
+            <ListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"  WinPhone="{StaticResource ListSeparator}"/>
+            </ListView.SeparatorColor>
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.Height>
+                            <OnPlatform x:TypeArguments="x:Double" iOS="28"/>
+                        </ViewCell.Height>
+                        <local:EvolveGroupHeaderView/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell StyleId="disclosure">
+                        <Grid Padding="{StaticResource StandardPadding}" ColumnSpacing="{StaticResource StandardSpacing}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Spacing="{StaticResource SmallSpacing}" VerticalOptions="Center">
+                                <Grid>
+                                    <imagecircle:CircleImage WidthRequest="35" HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Center"
+                            FillColor="{Binding StartTime, Converter={StaticResource EventColorDisplayConverter}}"/>
+                                    <Label Text="{Binding  StartTime, Converter={StaticResource EventDayNumberDisplayConverter}}" 
+                               VerticalTextAlignment="Center" 
+                               HorizontalTextAlignment="Center"
+                               Style="{x:DynamicResource EvolveListItemTextStyle}"
+                               TextColor="White"
+                               StyleId="EventItemCircleDate"/>
+                                </Grid>
+                                <Label  Text="{Binding StartTime, Converter={StaticResource EventDayDisplayConverter}}" 
+                               VerticalTextAlignment="Center" 
+                               HorizontalTextAlignment="Center"
+                               Style="{x:DynamicResource EvolveListItemDetailTextStyle}"
+                               StyleId="EventItemDay"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding Title}" 
+                               Style="{x:DynamicResource EvolveListItemTextStyle}" StyleId="EventItemTitle"/>
+                                <Label Text="{Binding ., Converter={StaticResource EventTimeDisplayConverter}}" 
+                               Style="{x:DynamicResource EvolveListItemDetailTextStyle}" StyleId="EventItemTime"/>
+                            </StackLayout>
+                       
+                        <Image Grid.Column="2" 
+                               Source="Pbtn.png"
+                               Aspect="AspectFit"
+                               Margin="6">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="EditOnTapped"></TapGestureRecognizer>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                            <Image Grid.Column="3" 
+                               Source="Delete.png"
+                               Aspect="AspectFit"
+                                   Margin="8">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="DeleteOnTapped"></TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
+
+                        --><!--<Grid HeightRequest="180" BackgroundColor="{DynamicResource Primary}">
+              <Image Source="{Binding ImageUrl, Converter={StaticResource EventImageConverter}}" 
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                Aspect="AspectFill"
+                HeightRequest="150"
+                StyleId="EventItemImage"/>
+              <StackLayout Padding="{StaticResource StandardPadding}" 
+                           Spacing="{StaticResource SmallSpacing}"
+                           VerticalOptions="End"
+                           BackgroundColor="{StaticResource PrimaryDarkTranslucent}"
+                           HorizontalOptions="FillAndExpand">
+                <Label Text="{Binding Title}" Style="{DynamicResource EvolveListItemTextStyle}" TextColor="White" LineBreakMode="NoWrap" StyleId="EventItemTitle"/>
+                <Label Text="{Binding ., Converter={StaticResource EventDateDisplayConverter}}" Style="{DynamicResource EvolveListItemDetailTextStyle}" TextColor="White" LineBreakMode="NoWrap" StyleId="EventItemDate"/>
+              </StackLayout>
+            </Grid>--><!--
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout IsVisible="{Binding IsBusy}"
+                                   AbsoluteLayout.LayoutFlags="PositionProportional"
+                                   AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+            <StackLayout.Orientation>
+                <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+            </StackLayout.Orientation>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                <ActivityIndicator.Color>
+                    <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                </ActivityIndicator.Color>
+            </ActivityIndicator>
+            <Label Text="Loading Events..." HorizontalOptions="Center" Style="{x:DynamicResource EvolveListItemTextStyle}"/>
+        </StackLayout>
+
+        --><!--New Event--><!--
+        <Image Source="{local:ImageResource Sealegs.Clients.UI.Images.add.png}"
+            Style="{StaticResource DashboardImageStyle}"
+              VerticalOptions="EndAndExpand" BackgroundColor="Transparent"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+           AbsoluteLayout.LayoutBounds="1,1, 150, 150">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
+            </Image.GestureRecognizers>
+        </Image>
+    </AbsoluteLayout>-->
+</ContentPage>

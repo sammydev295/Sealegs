@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ui="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             x:Class="Sealegs.Clients.UI.Pages.Wine.Wines"
+             Title="Wines">
+    <ContentPage.Content>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        <Grid BackgroundColor="#7635EB" HeightRequest="40" ColumnSpacing="0" IsVisible="{Binding TopIsVisible}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Checked Out" Grid.Column="0" FontAttributes="Bold"
+                   TextColor="{Binding PassedTextColor}" 
+                   BackgroundColor="{Binding PassedBackgroundColor}"
+                   FontSize="20" WidthRequest="100"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PassedCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="In Locker" Grid.Column="1" FontAttributes="Bold"
+                   TextColor="{Binding UpcomingTextColor}"
+                   BackgroundColor="{Binding UpcomingBackgroundColor}"
+                   FontSize="20" WidthRequest="100"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UpcomingCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+            <AbsoluteLayout Grid.Row="1">
+            <ListView  ItemsSource="{Binding Wines}"
+                      IsPullToRefreshEnabled="True" IsVisible="{Binding WineIsVisible}"  
+                      RefreshCommand="{Binding ForceRefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
+                       HasUnevenRows="True" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                       SeparatorVisibility="Default" ItemSelected="ListView_OnItemSelected" ItemTapped="ListView_OnItemTapped">
+                <ListView.SeparatorColor>
+                    <Color>White</Color>
+                </ListView.SeparatorColor>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                                <ui:CardView IsClippedToBounds="True" CornerRadius="5" BackgroundColor="#F5F5F5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="3*" />
+                                    </Grid.ColumnDefinitions>
+                                        <StackLayout Grid.Column="1" Spacing="0" Margin="10,0,0,0"  VerticalOptions="CenterAndExpand">
+                                     <Label Text="{Binding WineTitle}" TextColor="Gray" FontAttributes="Bold" FontSize="20"/>
+                                            <Label Text="{Binding Vintage,StringFormat='Vintage: {0}'}" TextColor="Gray"/>
+                                            <Label Text="{Binding BottleSize,StringFormat='Bottle Size: {0}'}" TextColor="Gray"/>
+                                            <Label Text="{Binding CheckedInDate,StringFormat='Checked In: {0}'}" TextColor="Gray"/>
+                                        </StackLayout>
+                                   
+                                    <Image Grid.Column="0" Source="{Binding ImagePath}" HorizontalOptions="CenterAndExpand" Margin="5"/>
+                                </Grid>
+                                </ui:CardView>
+                         
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout IsVisible="{Binding NoWinesFound}"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="CenterAndExpand"
+                         AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         BackgroundColor="{x:DynamicResource WindowBackground}"
+                         Padding="16,0">
+                <Label Text="No Wines Found" HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"
+                       FontSize="22" TextColor="#D3D2D2"/>
+            </StackLayout>
+                <StackLayout IsVisible="{Binding IsBusy}"
+                             AbsoluteLayout.LayoutFlags="PositionProportional"
+                             AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                    <StackLayout.Orientation>
+                        <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+                    </StackLayout.Orientation>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                        <ActivityIndicator.Color>
+                            <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                        </ActivityIndicator.Color>
+                    </ActivityIndicator>
+                    <Label Text="Loading Wines..." HorizontalOptions="Center" Style="{x:DynamicResource EvolveListItemTextStyle}"/>
+                </StackLayout>
+            </AbsoluteLayout>
+        </Grid>
+     
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             xmlns:xfControls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             x:Class="Sealegs.Clients.UI.Pages.Profile.Profile"
+             Title="Profile Page">
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem Icon="btnLocker.png" Command="{Binding EditProfileCommand}" />-->
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Source="Profile_background.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                   Aspect="AspectFill"/>
+            <Label Grid.Row="0" Text="{Binding FirstName}" TextColor="White" HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand" Margin="0,0,0,50" FontSize="30" FontAttributes="Bold"/>
+            <abstractions:CircleImage Grid.Row="0" Grid.RowSpan="2"  Source="{Binding ProfilePath}" Aspect="AspectFill"
+                                      HeightRequest="130" WidthRequest="130" HorizontalOptions="CenterAndExpand"
+                                      Margin="15,50,15,0" VerticalOptions="CenterAndExpand" BorderColor="Purple" BorderThickness="1">
+                <abstractions:CircleImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CameraCommand}"/>
+                </abstractions:CircleImage.GestureRecognizers>
+            </abstractions:CircleImage>
+            <ScrollView Grid.Row="2">
+                <StackLayout Margin="20,0,20,20">
+                    <StackLayout  IsVisible="{Binding AdminViewVisibilty}">
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                       HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Name: " Style="{StaticResource ProfileLabelStyle}" ></Label>
+                                <Entry TextColor="Gray" Text="{Binding FullName}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                   BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                       HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Email: " Style="{StaticResource ProfileLabelStyle}" ></Label>
+                                <Entry TextColor="Gray" Text="{Binding Email}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                   BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                    </StackLayout>
+                    <StackLayout IsVisible="{Binding LockerMemberViewVisibilty}" >
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Name: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                                <Entry TextColor="Gray" Text="{Binding LockerMember.DisplayName}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Email: " Style="{StaticResource ProfileLabelStyle}" ></Label>
+                                <Label TextColor="Gray" Text="{Binding LockerMember.EmailAddress}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Street: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                                <Entry TextColor="Gray" Text="{Binding LockerMember.Street}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                       
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="City: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                                <Entry TextColor="Gray" Text="{Binding LockerMember.City}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="State: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                                <Entry TextColor="Gray" Text="{Binding LockerMember.State}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Zip Code: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                                <Entry TextColor="Gray" Text="{Binding ZipCode}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Home Phone: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                                <Entry TextColor="Gray" Text="{Binding HomePhone}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Work Phone: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                                <Entry TextColor="Gray" Text="{Binding WorkPhone}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Mobile: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                                <Entry TextColor="Gray" Text="{Binding Mobile}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Credit Card Number: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                                <Entry TextColor="Gray" Text="{Binding CreditCardNumber}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Expirey Date: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                                <Entry TextColor="Gray" Text="{Binding ExpireyDate}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Name On Card: " Style="{StaticResource ProfileLabelStyle}" ></Label>
+                                <Entry TextColor="Gray" Text="{Binding NameOnCard}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Total Bottles: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                                <Entry TextColor="Gray" Text="{Binding NoOfBottles}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+                        <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                           HeightRequest="50" CornerRadius="10" Padding="10,0,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label TextColor="Gray" Text="Comments: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                                <Entry TextColor="Gray" Text="{Binding Notes}" FontSize="20" WidthRequest="230" HeightRequest="35"
+                                       BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </xfControls:Border>
+
+                         </StackLayout>
+                    <xfControls:Border BackgroundColor="#E0E1E1" Stroke="Gray" StrokeThickness="2" HorizontalOptions="FillAndExpand"
+                                       HeightRequest="50" CornerRadius="10" Margin="10,0,0,0">
+                        <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                            <Label TextColor="Gray" Text="Finger Unlock: " Style="{StaticResource ProfileLabelStyle}"></Label>
+                            <Switch IsEnabled="True" IsToggled="{Binding IsFingerScanEnable}"  WidthRequest="100"></Switch>
+                        </StackLayout>
+                    </xfControls:Border>
+                    <xfControls:Border BackgroundColor="Purple" Stroke="Purple" StrokeThickness="3" HorizontalOptions="FillAndExpand"
+                                       HeightRequest="40" CornerRadius="10" Padding="10,0,0,0">
+                        <Label TextColor="White" Text="Update " FontSize="20"
+                               HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EditProfileCommand}"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </xfControls:Border>
+
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Grid.Row="2" IsVisible="{Binding IsBusy}"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                <StackLayout.Orientation>
+                    <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+                </StackLayout.Orientation>
+                <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                    <ActivityIndicator.Color>
+                        <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                    </ActivityIndicator.Color>
+                </ActivityIndicator>
+                <Label Text="Loading Wines..." HorizontalOptions="Center" Style="{x:DynamicResource EvolveListItemTextStyle}"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+    xmlns:xf="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+    xmlns:toolkit="clr-namespace:FormsToolkit;assembly=FormsToolkit"
+             x:Class="Sealegs.Clients.UI.EventDetailsPage"
+    Title="Event Details"
+    
+    BackgroundColor="{DynamicResource WindowBackgroundTable}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:EventDateDisplayConverter x:Key="EventDateDisplayConverter" />
+            <local:HasReminderEventTextConverter x:Key="HasReminderEventTextConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <!--<local:AlwaysScrollView Grid.Row="0">-->
+        <StackLayout Spacing="0" VerticalOptions="FillAndExpand">
+            <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}"
+                             Spacing="{DynamicResource CardSpacing}"
+                             Padding="{DynamicResource CardPadding}"
+                         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <xf:Border CornerRadius="15" Stroke="Gray" StrokeThickness="1"
+                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <local:CardView CornerRadius="15">
+
+                        <StackLayout Padding="0" Spacing="0" BackgroundColor="White" 
+                                     HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Label Text="{Binding Title}" TextColor="Gray" FontSize="20"
+                                   FontAttributes="Bold" HeightRequest="50" VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Center"/>
+                            <Label HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand"
+                                       Margin="10,3,10,3"/>
+                            <local:AlwaysScrollView Grid.Row="0"   >
+                                <Label Text="{Binding Description}" HorizontalOptions="CenterAndExpand" Margin="7,0"
+                                       Style="{DynamicResource EvolveListItemTextStyle}" StyleId="EventDescription"
+                                       HorizontalTextAlignment="Start"/>
+                            </local:AlwaysScrollView>
+                            <StackLayout  VerticalOptions="EndAndExpand" Spacing="0">
+                                <Label HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand"
+                                       Margin="10,3,10,3" />
+                                <Grid  Margin="7,5" MinimumHeightRequest="120" VerticalOptions="End">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="2.5*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0"  Grid.Column="0" Text="Timing" 
+                                           FontSize="12" VerticalTextAlignment="Center"/>
+                                    <Label  Grid.Row="0"  Grid.Column="1" Text="{Binding Event,
+                                        Converter={StaticResource EventDateDisplayConverter}}" 
+                                            TextColor="{DynamicResource DetailTextColor}" 
+                                            VerticalTextAlignment="Center"  FontSize="12" />
+
+                                    <Label Grid.Row="1"  Grid.Column="0" Text="Location"  FontSize="12" VerticalTextAlignment="Center"/>
+                                    <Label  Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" Text="{Binding LocationName}" 
+                                            FontSize="12"  TextColor="{DynamicResource DetailTextColor}" HorizontalTextAlignment="Start"
+                                            VerticalTextAlignment="Center" />
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </local:CardView>
+
+                </xf:Border>
+            </StackLayout>
+        </StackLayout>
+        <!--</local:AlwaysScrollView>-->
+        <Button Grid.Row="1" Text="{Binding IsReminderSet, Converter={StaticResource HasReminderEventTextConverter}}"
+                Command="{Binding ReminderCommand}" TextColor="White"
+                HorizontalOptions="FillAndExpand"  BackgroundColor="{StaticResource Primary}"
+                StyleId="AndroidReminderButton">
+            <Button.IsVisible>
+                <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true" WinPhone="true"/>
+            </Button.IsVisible>
+        </Button>
+    </Grid>
+
+</ContentPage>

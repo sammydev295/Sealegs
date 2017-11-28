@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ui="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             xmlns:controls="clr-namespace:Sealegs.Clients.UI.Controls;assembly=Sealegs.Clients.UI"
+             x:Class="Sealegs.Clients.UI.Employees"
+             Title="Employees"
+             Icon="Employee_Icon.png"
+             NavigationPage.BackButtonTitle="Back"
+             BackgroundColor="{x:DynamicResource WindowBackgroundTable}">
+
+    <!--<DataTemplate>
+        <ViewCell>
+            <StackLayout Padding="5">
+                <Grid Margin="3,3" x:Name="Item" RowSpacing="0" BackgroundColor="#DCDCDC" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="45"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Padding="5" Grid.Row="0" Grid.Column="0" >
+                        <Label Text="{Binding DisplayName}" HeightRequest="20" FontSize="16" />
+                    </StackLayout>
+                    <StackLayout Padding="5" Grid.Row="0" Grid.Column="1" >
+                        <Label Text="{Binding Role}" HeightRequest="18" FontSize="14" />
+                    </StackLayout>
+                    <StackLayout Padding="5" Grid.Row="1" Grid.Column="0" >
+                        <Label Text="{Binding EmailAddress}" HeightRequest="18" FontSize="14" />
+                    </StackLayout>
+                    <StackLayout Padding="5"  Grid.Row="1" Grid.Column="1" >
+                        <Label Text="{Binding Mobile}" HeightRequest="18" FontSize="14"/>
+                    </StackLayout>
+                    <Grid  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ColumnSpacing="0" HeightRequest="20" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Padding="15,0,15,0"  Grid.Column="0" >
+                            <Label Text="Edit"  TextColor="#7635EB"  FontSize="14"  VerticalOptions="EndAndExpand" VerticalTextAlignment="End" Margin="0,10,0,0"
+                                   HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+                            <Label BackgroundColor="#7635EB" HeightRequest="1" VerticalOptions="StartAndExpand" VerticalTextAlignment="Start"/>
+                        </StackLayout>
+                        <StackLayout Padding="15,0,15,0"  Grid.Column="1" >
+                            <Label Text="Status"  TextColor="#7635EB"  FontSize="14" VerticalOptions="EndAndExpand" VerticalTextAlignment="End" Margin="0,10,0,0"
+                                   HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+                            <Label BackgroundColor="#7635EB"  HeightRequest="1" VerticalOptions="StartAndExpand" VerticalTextAlignment="Start" />
+                        </StackLayout>
+                        <StackLayout Padding="15,0,15,0"  Grid.Column="2" >
+                            <Label Text="Delete" TextColor="#7635EB" FontSize="14" VerticalOptions="EndAndExpand" VerticalTextAlignment="End" Margin="0,10,0,0"
+                                   HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+                            <Label BackgroundColor="#7635EB"  HeightRequest="1" VerticalOptions="StartAndExpand" VerticalTextAlignment="Start" />
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </StackLayout>
+        </ViewCell>
+    </DataTemplate>-->
+
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ListView x:Name="ListViewEmployees" ItemsSource="{Binding EmployeesList}"
+                  SelectedItem="{Binding SelectedEmployee}" IsVisible="{Binding EmployeesFound}"
+                  HasUnevenRows="True" BackgroundColor="White" ItemSelected="ListViewEmployees_OnItemSelected" ItemTapped="ListViewEmployees_OnItemTapped"
+                  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <ListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" WinPhone="{StaticResource ListSeparator}"/>
+            </ListView.SeparatorColor>
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.Height>
+                            <OnPlatform x:TypeArguments="x:Double" iOS="28"/>
+                        </ViewCell.Height>
+                        <ui:EvolveGroupHeaderView/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ui:CardView HasShadow="True" CornerRadius="5" Margin="10,0">
+                            <StackLayout Margin="10,10">
+                                <Label Text="{Binding DisplayName}" TextColor="Gray" FontSize="20"
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding Role.RoleName}" TextColor="Gray" FontSize="12"/>
+                                <Label Text="{Binding EmailAddress,StringFormat='Email: {0}'}" TextColor="Gray" FontSize="12"/>
+                                <Label Text="{Binding Mobile,StringFormat='Contact: {0}'}" TextColor="Gray" FontSize="12"/>
+                            </StackLayout>
+                        </ui:CardView>
+                    </ViewCell>
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackLayout IsVisible="{Binding IsBusy}"
+                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                     AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+            <StackLayout.Orientation>
+                <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+            </StackLayout.Orientation>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                <ActivityIndicator.Color>
+                    <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                </ActivityIndicator.Color>
+            </ActivityIndicator>
+            <Label Text="Loading Lockers..." HorizontalOptions="Center" Style="{x:DynamicResource EvolveListItemTextStyle}"/>
+        </StackLayout>
+
+        <!--No Locker Found Message-->
+        <StackLayout IsVisible="{Binding NoEmployeesFound}"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="CenterAndExpand"
+                     AbsoluteLayout.LayoutFlags="All"
+                     AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     BackgroundColor="{x:DynamicResource WindowBackground}"
+                     Padding="16,0">
+            <Label Text="{Binding NoEmployeesFoundMessage}" HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"
+                   FontSize="22" TextColor="#D3D2D2"/>
+        </StackLayout>
+
+        <!--New Locker-->
+        <controls:ImageButton Source="{ui:ImageResource Sealegs.Clients.UI.Images.add.png}" Style="{StaticResource DashboardImageStyle}"
+                               VerticalOptions="EndAndExpand" BackgroundColor="Transparent" AbsoluteLayout.LayoutFlags="PositionProportional"
+                               AbsoluteLayout.LayoutBounds="1,1, 150, 150" Command="{Binding AddCommand}">
+        </controls:ImageButton>
+    </AbsoluteLayout>
+</ContentPage>

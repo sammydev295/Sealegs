@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Sealegs.Clients.UI.Controls;assembly=Sealegs.Clients.UI"
+             xmlns:ui="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             x:Class="Sealegs.Clients.UI.Pages.Support.ContactUs">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <ui:AlwaysScrollView Grid.Row="0">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" HeightRequest="100">
+                        <Image Source="SealegsIcon.png" Margin="10,0,0,0"/>
+                        <Label Text="Sealegs Wine Bar" TextColor="Gray" FontSize="25" FontAttributes="Bold"
+                               VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                    <Label HorizontalOptions="FillAndExpand" BackgroundColor="Gray" Margin="10,0"
+                           HeightRequest="1"/>
+                    <Image  Source="address.png" HeightRequest="120"/>
+                    <Label HorizontalOptions="FillAndExpand" BackgroundColor="Gray" Margin="10,0"
+                           HeightRequest="1"/>
+                    <StackLayout  Margin="20,5">
+                        <Entry Text="{Binding Name}" Placeholder="Name"/>
+                        <Entry Text="{Binding LastName}" Placeholder="LastName"/>
+                        <Entry Text="{Binding Phone}" Placeholder="Phone"/>
+                        <Entry Text="{Binding Email}" Placeholder="Email"/>
+                        <Entry Text="{Binding Message}" Placeholder="Message"/>
+                        <Button Text="Submit" BackgroundColor="#7635eb" Command="{Binding SubmitCommand}" TextColor="White"/>
+                    </StackLayout>
+                </StackLayout>
+            </ui:AlwaysScrollView>
+            <Grid Grid.Row="1" BackgroundColor="#7635eb">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <controls:ImageButton Grid.Column="0" Source="facebook.png" Command="{Binding FacebookCommand}"/>
+                <Label Grid.Column="1" BackgroundColor="White"/>
+                <controls:ImageButton Grid.Column="2" Source="googleplus.png" Command="{Binding GoogleCommand}"/>
+                <Label Grid.Column="3" BackgroundColor="White"/>
+                <controls:ImageButton Grid.Column="4" Source="twitter.png" Command="{Binding TwitterCommand}" Margin="3,0"/>
+                <Label Grid.Column="5" BackgroundColor="White"/>
+                <controls:ImageButton Grid.Column="6" Source="youtube.png" Command="{Binding YoutubeCommand}" Margin="3,0"/>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

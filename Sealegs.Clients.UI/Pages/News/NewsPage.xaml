@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Sealegs.Clients.UI.NewsPage"
+    xmlns:local="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+    Title="News"
+    Icon="tab_news.png"
+    BackgroundColor="{DynamicResource WindowBackground}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="{Binding EditIcon}" Command="{Binding ManageCommand}"/>
+    </ContentPage.ToolbarItems>
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ListView  x:Name="ListViewNews" ItemsSource="{Binding News}"
+                HasUnevenRows ="True" IsPullToRefreshEnabled="True"
+                RefreshCommand="{Binding ForceRefreshCommand}" IsRefreshing="{Binding IsListBusy}" 
+                CachingStrategy="RecycleElement" AbsoluteLayout.LayoutFlags="All" 
+                AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                ItemSelected="ListViewNews_OnItemSelected" ItemTapped="ListViewNews_OnItemTapped">
+            <ListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" Android="Transparent"/>
+            </ListView.SeparatorColor>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Spacing="0" HeightRequest="120">
+                            <StackLayout.Padding>
+                                <OnPlatform x:TypeArguments="Thickness" iOS="0" Android="0,4" WinPhone="0"/>
+                            </StackLayout.Padding>
+                            <local:CardView HeightRequest="120">
+                                <Grid  ColumnSpacing="16" BackgroundColor="White">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image  Source="{Binding ImageUrl}" HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="FillAndExpand" StyleId="NewsImage" Aspect="AspectFit">
+                                    </Image>
+                                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Grid.Column="1" Spacing="0">
+                                        <Label Text="{Binding Name}" TextColor="Gray" FontAttributes="Bold" FontSize="15"/>
+                                        <Label Text="{Binding Description, StringFormat='{0} News'}" TextColor="Gray" FontAttributes="Italic"/>
+                                    </StackLayout>
+
+                                </Grid>
+                            </local:CardView>
+                        </StackLayout>
+                        <!--<local:NewsCell HeightRequest="120"/>-->
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="PositionProportional"
+                     AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+            <StackLayout.Orientation>
+                <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+            </StackLayout.Orientation>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                <ActivityIndicator.Color>
+                    <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                </ActivityIndicator.Color>
+            </ActivityIndicator>
+            <Label Text="Loading News..." HorizontalOptions="Center" Style="{DynamicResource EvolveListItemTextStyle}"/>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:formsToolkit="clr-namespace:FormsToolkit;assembly=FormsToolkit"
+             x:Class="Sealegs.Clients.UI.AddEmployee" x:Name="AddEmployees"
+             Title="{Binding PageTitle}"  Icon="Employee_Icon.png"
+             NavigationPage.BackButtonTitle="Info" 
+             BackgroundColor="{x:DynamicResource WindowBackgroundTable}">
+
+  <ScrollView>
+    <Grid RowSpacing="{StaticResource MediumSpacing}"
+          ColumnSpacing="{StaticResource MediumSpacing}">
+      <StackLayout Padding="5">
+        <formsToolkit:EntryLine Text="{Binding FullName}"
+                                HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"
+                                Placeholder="Employee Full Name" StyleId="EmployeeFullNameTextField"
+                                 BorderColor="#ECECEC"/>
+        <formsToolkit:EntryLine Text="{Binding Email}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Email Address"
+                                StyleId="EmailTextField" 
+                                BorderColor="#ECECEC"/>
+        <formsToolkit:EntryLine Text="{Binding Password}" HorizontalOptions="FillAndExpand"
+                                IsPassword="true" HorizontalTextAlignment="Start"
+                                Placeholder="Password" StyleId="PasswordTextField"
+                                 BorderColor="#ECECEC"/>
+        <formsToolkit:EntryLine Text="{Binding ConfirmPassword}" HorizontalOptions="FillAndExpand"
+                                IsPassword="true" HorizontalTextAlignment="Start"
+                                Placeholder="Confirm Password" StyleId="ConfirmPasswordTextField"
+                                 BorderColor="#ECECEC"/>
+        <formsToolkit:EntryLine Text="{Binding Mobile}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Mobile"
+                                StyleId="MobileTextField" 
+                                BorderColor="#ECECEC"/>
+        <formsToolkit:EntryLine Text="{Binding Twitter}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Twitter ID"
+                                StyleId="TwitterTextField" 
+                                BorderColor="#ECECEC"/>
+        <formsToolkit:EntryLine Text="{Binding Facebook}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Facebook ID"
+                                StyleId="FacebookTextField" 
+                                BorderColor="#ECECEC"/>
+        <Editor Text="{Binding Notes}" x:Name="EditorNotes" HorizontalOptions="FillAndExpand"
+                StyleId="NotesTextField" IsEnabled="{Binding IsNotBusy}" HeightRequest="100"/>
+                <Picker StyleId="RolesPicker"  Title="Select Role" />
+
+        <Button Text="{Binding ButtonName}" Command="{Binding AddEmployeeCommand}"
+                HorizontalOptions="FillAndExpand" 
+                StyleId="AddEmployeeButton" TextColor="White" BackgroundColor="{StaticResource Primary}">
+          <Button.FontAttributes>
+            <OnPlatform x:TypeArguments="FontAttributes" iOS="Bold"/>
+          </Button.FontAttributes>
+        </Button> 
+        <Button Text="Reset" Command="{Binding ResetFieldCommand}"
+                HorizontalOptions="FillAndExpand" 
+                StyleId="ResetButton" TextColor="White"
+                BackgroundColor="{StaticResource Primary}">
+          <Button.FontAttributes>
+            <OnPlatform x:TypeArguments="FontAttributes" iOS="Bold"/>
+          </Button.FontAttributes>
+        </Button>
+      </StackLayout>
+    </Grid>
+  </ScrollView>
+</ContentPage>

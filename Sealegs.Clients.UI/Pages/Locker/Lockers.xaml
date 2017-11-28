@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+    x:Class="Sealegs.Clients.UI.Lockers"
+    x:Name="LockersPage"
+    Title="Lockers"
+    Icon="tab_sessions.png"
+    BackgroundColor="{x:DynamicResource WindowBackground}">
+  <ContentPage.Content>
+      <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+        <!--ItemsSource="{Binding SessionsGrouped}"-->
+        <ListView
+             x:Name="ListViewLockers" 
+             IsGroupingEnabled="true"
+             IsPullToRefreshEnabled="{Binding IsNotBusy}"
+             RefreshCommand="{Binding ForceRefreshCommand}"
+             IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+             HasUnevenRows ="true"
+             CachingStrategy="RecycleElement"
+             IsVisible="{Binding IsNotBusy}"
+             BackgroundColor="White"
+             AbsoluteLayout.LayoutFlags="All"
+             AbsoluteLayout.LayoutBounds="0,0,1,1">
+          <ListView.SeparatorColor>
+            <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" WinPhone="{StaticResource ListSeparator}"/>
+          </ListView.SeparatorColor>
+          <ListView.GroupHeaderTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <ViewCell.Height>
+                  <OnPlatform x:TypeArguments="x:Double" iOS="28"/>
+                </ViewCell.Height>
+                <local:EvolveGroupHeaderView/>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.GroupHeaderTemplate>
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <!--Inflate main Session Cell here-->
+                <local:SessionCellView FavoriteCommand="{Binding Path=BindingContext.FavoriteCommand, Source={x:Reference SessionsPage}}"/>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Loading -->
+        <StackLayout IsVisible="{Binding IsBusy}"
+                                      AbsoluteLayout.LayoutFlags="PositionProportional"
+                                      AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+          <StackLayout.Orientation>
+            <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+          </StackLayout.Orientation>
+          <ActivityIndicator IsRunning="{Binding IsBusy}" >
+            <ActivityIndicator.Color>
+              <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+            </ActivityIndicator.Color>
+          </ActivityIndicator>
+          <Label Text="Loading Lockers..." HorizontalOptions="Center" Style="{x:DynamicResource EvolveListItemTextStyle}"/>
+        </StackLayout>
+
+        <!-- No Lcokers Found -->
+        <StackLayout IsVisible="{Binding NoSessionsFound}"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="CenterAndExpand"
+                     AbsoluteLayout.LayoutFlags="All"
+                     AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     BackgroundColor="{x:DynamicResource WindowBackground}"
+                     Padding="16,0">
+          <Label Text="{Binding NoSessionsFoundMessage}" HorizontalOptions="Center"
+                 HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"
+                 FontSize="22" TextColor="#D3D2D2"/>
+        </StackLayout>
+      </AbsoluteLayout>
+
+  </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="SharedProjectFile_SccProperties">
+    <SharedProjectFile_ProjectGuid>{1d2354e5-c141-4b80-8019-9407de30c7cc}</SharedProjectFile_ProjectGuid>
+    <SharedProjectFile_SccProjectName>SAK</SharedProjectFile_SccProjectName>
+    <SharedProjectFile_SccAuxPath>SAK</SharedProjectFile_SccAuxPath>
+    <SharedProjectFile_SccLocalPath>SAK</SharedProjectFile_SccLocalPath>
+    <SharedProjectFile_SccProvider>SAK</SharedProjectFile_SccProvider>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{7EDD0E09-3B40-41AB-83DD-01317426CA1A}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Sealegs.DataObjects</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BaseDataObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Category.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FeaturedEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MasterMenuItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteChillRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SealegsUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SealegsUserRole.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Wine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WineVarietal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MemberFriend.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Depricated\MemberSuggestion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MemberBottle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Favorite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Feedback.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Depricated\Events.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LockerType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LockerMember.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Depricated\Room.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)News.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NewsLevel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notification.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Depricated\MiniHack.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Depricated\" />
+  </ItemGroup>
+</Project>

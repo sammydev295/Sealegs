@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:test="clr-namespace:Sealegs.Clients.UI.Test;assembly=Sealegs.Clients.UI"
+             x:Class="Sealegs.Clients.UI.Test.TestPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <test:CstmList x:Name="CstmList" OnItemSelected="CstmList_OnOnItemSelected" >
+                <test:CstmList.Template>
+                    <DataTemplate>
+                        <Label Text="{Binding .}"></Label>
+                    </DataTemplate>
+                </test:CstmList.Template>
+            </test:CstmList>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

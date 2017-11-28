@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="Sealegs.Clients.UI.EvaluationsPage"
+		xmlns:local="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+    x:Name="EvaluationsPage"
+    Title="Feedback And Ratings"
+    BackgroundColor="{x:DynamicResource WindowBackground}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:EvalTemplateSelector x:Key="EvalTemplateSelector"></local:EvalTemplateSelector>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ListView 
+            x:Name="ListViewLockers"
+			ItemsSource="{Binding Lockers}"
+            ItemTemplate="{StaticResource EvalTemplateSelector}"
+            HasUnevenRows ="true"
+            CachingStrategy="RecycleElement"
+            IsVisible="{Binding IsNotBusy}"
+            BackgroundColor="White"
+            AbsoluteLayout.LayoutFlags="All" 
+            AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <ListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" WinPhone="{StaticResource ListSeparator}"/>
+            </ListView.SeparatorColor>
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.Height>
+                            <OnPlatform x:TypeArguments="x:Double" iOS="28"/>
+                        </ViewCell.Height>
+                        <local:EvolveGroupHeaderView/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <local:LockerCell />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout IsVisible="{Binding IsBusy}"
+                                   AbsoluteLayout.LayoutFlags="PositionProportional"
+                                   AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+            <StackLayout.Orientation>
+                <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+            </StackLayout.Orientation>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                <ActivityIndicator.Color>
+                    <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                </ActivityIndicator.Color>
+            </ActivityIndicator>
+            <Label Text="Loading Feedback And Ratings..." HorizontalOptions="Center" Style="{x:DynamicResource EvolveListItemTextStyle}"/>
+        </StackLayout>
+        <StackLayout IsVisible="{Binding NoLockersFound}"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="CenterAndExpand"
+                                   AbsoluteLayout.LayoutFlags="All"
+                                   AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    BackgroundColor="{x:DynamicResource WindowBackground}"
+                    Padding="16,0">
+            <Label Text="{Binding NoLockersFoundMessage}" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" FontSize="22" TextColor="#D3D2D2"/>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xfControls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             xmlns:ui="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             xmlns:controls="clr-namespace:Sealegs.Clients.UI.Controls;assembly=Sealegs.Clients.UI"
+             x:Class="Sealegs.Clients.UI.Pages.Support.AboutUs">
+    <ContentPage.Content>
+        <xfControls:Flip >
+            <xfControls:Flip.Children>
+                <StackLayout >
+                    <Image Source="AboutUs1.png" Aspect="AspectFill" HorizontalOptions="CenterAndExpand"
+                           HeightRequest="200"/>
+                    <ScrollView >
+                        <Label Text="Located at 21022 Beach Blvd in downtown Huntington Beach, SeaLegs Wine Bar offers a Hamptons-style ambiance where guests can enjoy family-style seating, or sneak off to the many smaller, side tables and experience a quiet, intimate feel. California cuisine share plates and wine pairings and revolving dinner specials are only a few surprises SeaLegs has in store. The menu features an inspiration of old world tradition, California-fresh, and a touch of New England class. Seasonal and ever-changing, the SeaLegs Wine Bar menu boasts a wealth of fresh, local and sustainable items. Throw in an expansive wine cellar that will store over 4000 unique bottles, 40 wine lockers and an extensive craft beer collection spotlighting 10 ice cold beers on draft and many more by the bottle. SeaLegs is sure to satisfy every appetite."
+                               TextColor="Gray" Margin="15,10,15,0"/>
+                    </ScrollView>
+                </StackLayout>
+                <StackLayout >
+                    <Image Source="AboutUs2.png" Aspect="AspectFill" HorizontalOptions="CenterAndExpand"
+                           HeightRequest="200"/>
+                    <ScrollView>
+                        <Label Text="World renowned designer Kenneth Ussenko is personally responsible for SeaLeg's sleek, yet, cozy flare while hand-crafted pieces and vintage photos accentuate the inviting ambience. Musical arrays range from Jack Johnson to Norah Jones and arc back in time with the great billows of Sinatra and Fitzgerald. SeaLegs Wine Bar specializes in group events or a simple night out on the town, offering the ideal setting to toast to anything you'd like."
+                               TextColor="Gray" Margin="15,0,15,0"/>
+                    </ScrollView>
+                </StackLayout>
+                <StackLayout >
+                    <Image Source="AboutUs3.png" Aspect="AspectFill" HorizontalOptions="CenterAndExpand"
+                           HeightRequest="200"/>
+                    <ScrollView>
+                        <Label Text="Created by Restauraunteur Alicia Whitney who took her passion for food, wine and entertaining and created the fasted growing wine bar in Southern California. Her robust background of marketing, events and nightlife met together with Chef Alexander Dale's culinary skills, deep rooted Southern California restaurant heritage and vision. Together they created a place that where guests want to get lost in the moment and transport to a time where conversation and laughter flowed as liberally as the wine."
+                               TextColor="Gray" Margin="15,0,15,0"/>
+                    </ScrollView>
+                </StackLayout>
+                <ScrollView>
+                    <StackLayout>
+                        <ui:CardView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,5">
+                            <controls:ImageButton Source="fb_image" Aspect="AspectFill"
+                                                  Command="{Binding LinkCommand}" CommandParameter="https://www.facebook.com/SeaLegsWineBar/"
+                                                  HeightRequest="100"/>
+                        </ui:CardView>
+                        <ui:CardView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,5">
+                            <controls:ImageButton Source="twiiter_img" Aspect="AspectFill" 
+                                                  Command="{Binding LinkCommand}"  CommandParameter="https://twitter.com/SeaLegsWineBar"
+                                                  HeightRequest="100"/>
+                        </ui:CardView>
+                        <ui:CardView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,5">
+                            <controls:ImageButton Source="websta" Aspect="AspectFill"
+                                                  Command="{Binding LinkCommand}" CommandParameter="https://websta.me/n/sealegswinebar"
+                                                  HeightRequest="100"/>
+                        </ui:CardView>
+                        <ui:CardView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,5">
+                            <controls:ImageButton Source="yelp_image" Aspect="AspectFill" 
+                                                  Command="{Binding LinkCommand}" CommandParameter="https://www.yelp.com/biz/sealegs-at-the-beach-huntington-beach-3"
+                                                  HeightRequest="100"/>
+                        </ui:CardView>
+                        <ui:CardView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,5">
+                            <controls:ImageButton Source="pinterst_img" Aspect="AspectFill" 
+                                                  Command="{Binding LinkCommand}" CommandParameter="https://in.pinterest.com/sealegsw/"
+                                                  HeightRequest="100"/>
+                        </ui:CardView>
+                    </StackLayout>
+                </ScrollView>
+
+            </xfControls:Flip.Children>
+        </xfControls:Flip>
+    </ContentPage.Content>
+</ContentPage>

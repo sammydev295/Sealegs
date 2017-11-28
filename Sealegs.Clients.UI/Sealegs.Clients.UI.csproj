@@ -1,0 +1,841 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{CD2623BD-3609-4BE9-80EF-0974F3A1A27D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Sealegs.Clients.UI</RootNamespace>
+    <AssemblyName>Sealegs.Clients.UI</AssemblyName>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;MOBILE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>2</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DefineConstants>MOBILE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UITest|iPhone' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\UITest</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>MOBILE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UITest|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\UITest</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>MOBILE;ENABLE_TEST_CLOUD</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Behaviors\CompareValidationBehavior.cs" />
+    <Compile Include="Behaviors\DateValidationBehavior.cs" />
+    <Compile Include="Behaviors\EmailValidatorBehavior.cs" />
+    <Compile Include="Behaviors\MinMaxLengthValidatorBehavior.cs" />
+    <Compile Include="Behaviors\NumberValidationBehavior.cs" />
+    <Compile Include="Behaviors\PasswordValidationBehavior.cs" />
+    <Compile Include="Cells\FloorMapCell.xaml.cs">
+      <DependentUpon>FloorMapCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cells\WineCell.xaml.cs">
+      <DependentUpon>WineCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BindablePicker.cs" />
+    <Compile Include="Controls\CardStackView.cs" />
+    <Compile Include="Controls\CarouselCardView.cs" />
+    <Compile Include="Controls\CustomPicker.cs" />
+    <Compile Include="Controls\EvalTemplateSelector.cs" />
+    <Compile Include="Controls\ImageButton.cs" />
+    <Compile Include="Controls\MultiPicker.cs" />
+    <Compile Include="Controls\SignatureView.cs" />
+    <Compile Include="Helpers\ItemTappedEvent.cs" />
+    <Compile Include="Helpers\PopUp.cs" />
+    <Compile Include="Helpers\StreamableImageSource.cs" />
+    <Compile Include="Pages\MasterMenu\Master.xaml.cs">
+      <DependentUpon>Master.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wine\RemoteChillRequestPage.xaml.cs">
+      <DependentUpon>RemoteChillRequestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Employees\AddEmployee.xaml.cs">
+      <DependentUpon>AddEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Evaluation\WineEvaluation.xaml.cs">
+      <DependentUpon>WineEvaluation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Events\AddEditEventPage.xaml.cs">
+      <DependentUpon>AddEditEventPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Events\EventsManagementPage.xaml.cs">
+      <DependentUpon>EventsManagementPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Info\FloorMapsCarouselPage.xaml.cs">
+      <DependentUpon>FloorMapsCarouselPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Employees\Employees.xaml.cs">
+      <DependentUpon>Employees.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Lockers\AddEditLockerPage.xaml.cs">
+      <DependentUpon>AddEditLockerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\News\AddEditNewspage.xaml.cs">
+      <DependentUpon>AddEditNewspage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\News\NewsManagmentPage.xaml.cs">
+      <DependentUpon>NewsManagmentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Notifications\AddEditNotifications.xaml.cs">
+      <DependentUpon>AddEditNotifications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Notifications\NotificationsManagment.xaml.cs">
+      <DependentUpon>NotificationsManagment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PopUp\RatingBarPopUp.xaml.cs">
+      <DependentUpon>RatingBarPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Profile\Profile.xaml.cs">
+      <DependentUpon>Profile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Support\AboutUs.xaml.cs">
+      <DependentUpon>AboutUs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Support\ContactUs.xaml.cs">
+      <DependentUpon>ContactUs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Windows\MenuPageUWP.xaml.cs">
+      <DependentUpon>MenuPageUWP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Windows\RootPage.cs" />
+    <Compile Include="Pages\Wine\AddWinePage.xaml.cs">
+      <DependentUpon>AddWinePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wine\CheckOutPage.xaml.cs">
+      <DependentUpon>CheckOutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wine\Wines.xaml.cs">
+      <DependentUpon>Wines.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wine\WinesCardViewPage.xaml.cs">
+      <DependentUpon>WinesCardViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wine\WinesCarouselPage.xaml.cs">
+      <DependentUpon>WinesCarouselPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wine\CheckOutFinal.xaml.cs">
+      <DependentUpon>CheckOutFinal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wine\Signature.xaml.cs">
+      <DependentUpon>Signature.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wine\WineCart.xaml.cs">
+      <DependentUpon>WineCart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wine\WineDetailsPopup.xaml.cs">
+      <DependentUpon>WineDetailsPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controls\SealegsNavigationPage.cs" />
+    <Compile Include="Pages\MasterMenu\RootPageAndroid.cs" />
+    <Compile Include="Pages\MasterMenu\MenuPage.xaml.cs">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\iOS\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\DateConverters.cs" />
+    <Compile Include="Behaviors\StarBehavior.cs" />
+    <Compile Include="Converters\RatingConverter.cs" />
+    <Compile Include="Helpers\ImageResourceExtension.cs" />
+    <Compile Include="Pages\Lockers\LockersPage.xaml.cs">
+      <DependentUpon>LockersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Test\CstmList.cs" />
+    <Compile Include="Test\TestPage.xaml.cs">
+      <DependentUpon>TestPage.xaml</DependentUpon>
+    </Compile>
+    <None Include="Pages\Lockers\FilterLockersPage.xaml.cs">
+      <DependentUpon>FilterLockersPage.xaml</DependentUpon>
+    </None>
+    <Compile Include="Pages\Lockers\LockerDetailsPage.xaml.cs">
+      <DependentUpon>LockerDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NavigationView.cs" />
+    <Compile Include="Cells\TextViewValue1.cs" />
+    <Compile Include="Cells\LockerCell.xaml.cs">
+      <DependentUpon>LockerCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cells\CategoryCellView.xaml.cs">
+      <DependentUpon>CategoryCellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\iOS\RootPageiOS.cs" />
+    <Compile Include="Pages\News\NewsPage.xaml.cs">
+      <DependentUpon>NewsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\News\NewsDetailsPage.xaml.cs">
+      <DependentUpon>NewsDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Events\EventsPage.xaml.cs">
+      <DependentUpon>EventsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Info\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Info\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Info\WiFiInformationPage.xaml.cs">
+      <DependentUpon>WiFiInformationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Info\CodeOfConductPage.xaml.cs">
+      <DependentUpon>CodeOfConductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Info\VenuePage.xaml.cs">
+      <DependentUpon>VenuePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MiniHacks\MiniHacksPage.xaml.cs">
+      <DependentUpon>MiniHacksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Events\EventDetailsPage.xaml.cs">
+      <DependentUpon>EventDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\ImageConverters.cs" />
+    <Compile Include="Controls\LabelSection.xaml.cs">
+      <DependentUpon>LabelSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SectionDivider.xaml.cs">
+      <DependentUpon>SectionDivider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NonScrollableListView.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CardView.cs" />
+    <Compile Include="Cells\EvolveGroupHeaderView.xaml.cs">
+      <DependentUpon>EvolveGroupHeaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ParallaxScrollView.cs" />
+    <Compile Include="Controls\HeaderDivider.xaml.cs">
+      <DependentUpon>HeaderDivider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FooterDivider.xaml.cs">
+      <DependentUpon>FooterDivider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\StringConverters.cs" />
+    <Compile Include="Cells\TweetCell.xaml.cs">
+      <DependentUpon>TweetCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Home\FeedPage.xaml.cs">
+      <DependentUpon>FeedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Home\TweetImagePage.xaml.cs">
+      <DependentUpon>TweetImagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Home\NotificationsPage.xaml.cs">
+      <DependentUpon>NotificationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Info\ConferenceInformationPage.xaml.cs">
+      <DependentUpon>ConferenceInformationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cells\NewsCell.xaml.cs">
+      <DependentUpon>NewsCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cells\NotificationCell.xaml.cs">
+      <DependentUpon>NotificationCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\NavigationService.cs" />
+    <Compile Include="Pages\Common\FeedbackPage.xaml.cs">
+      <DependentUpon>FeedbackPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cells\MiniHackCell.xaml.cs">
+      <DependentUpon>MiniHackCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MiniHacks\MiniHacksDetailsPage.xaml.cs">
+      <DependentUpon>MiniHacksDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AlwaysScrollView.cs" />
+    <Compile Include="Controls\FavoriteImage.cs" />
+    <Compile Include="Controls\PinchToZoomContainer.cs" />
+    <Compile Include="Pages\Lockers\EvaluationsPage.xaml.cs">
+      <DependentUpon>EvaluationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Info\FloorMapPage.xaml.cs">
+      <DependentUpon>FloorMapPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Forms.2.1.0.6508-pre3\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.1.0.6508-pre3\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Import Project="..\packages\Xamarin.Forms.2.3.0.34-pre1\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.0.34-pre1\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <ItemGroup>
+    <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Acr.UserDialogs.6.1.0\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.UserDialogs.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Acr.UserDialogs.6.1.0\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.XamForms.SignaturePad, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SignaturePad.Xamarin.Forms.PCL.1.0.0.1\lib\portable-win+net45+wp80+windows8+wpa+MonoAndroid10+MonoTouch10\Acr.XamForms.SignaturePad.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AsNum.XFControls, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XFControls.1.0.0.6\lib\portable-net45+win8+wp8+wpa81+MonoAndroid10+Xamarin.iOS10+MonoTouch10\AsNum.XFControls.dll</HintPath>
+    </Reference>
+    <Reference Include="DLToolkit.Forms.Controls.FlowListView, Version=1.0.6237.31064, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DLToolkit.Forms.Controls.FlowListView.2.0.4\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\DLToolkit.Forms.Controls.FlowListView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FFImageLoading, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.FFImageLoading.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FFImageLoading.Forms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.FFImageLoading.Forms.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Forms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FFImageLoading.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.FFImageLoading.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FormsToolkit, Version=1.1.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FormsToolkit.1.1.18\lib\portable-net45+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\FormsToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\portable-net45+wp8+wpa81+netcore45+monoandroid1+xamarin.ios10\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\portable-net45+wp8+wpa81+netcore45+monoandroid1+xamarin.ios10\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HockeySDK, Version=1.0.6387.33440, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HockeySDK.Xamarin.4.1.5\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\HockeySDK.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageCircle.Forms.Plugin.Abstractions, Version=1.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugins.Forms.ImageCircle.1.8.1\lib\portable-net45+wp80+win8+wpa81\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.Platform.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Plugins.Fingerprint, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.Plugins.Fingerprint.1.4.5\lib\portable-net45+win8+wpa81+wp8\MvvmCross.Plugins.Fingerprint.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmHelpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Refractored.MvvmHelpers.1.3.0\lib\netstandard1.0\MvvmHelpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\portable-net45+win8+wpa81+wp8\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NodaTime, Version=1.3.0.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NodaTime.1.3.1\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+XamariniOS1\NodaTime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Connectivity, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Connectivity.2.3.0\lib\portable-net45+wp80+win8+wpa81\Plugin.Connectivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Connectivity.Abstractions, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Connectivity.2.3.0\lib\portable-net45+wp80+win8+wpa81\Plugin.Connectivity.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Fingerprint, Version=1.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plugin.Fingerprint.1.4.4\lib\portable-net45+win8+wpa81+wp8\Plugin.Fingerprint.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Fingerprint.Abstractions, Version=1.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plugin.Fingerprint.1.4.4\lib\portable-net45+win8+wpa81+wp8\Plugin.Fingerprint.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Media.2.6.2\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Media.Abstractions, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Media.2.6.2\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Permissions, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plugin.Permissions.1.2.1\lib\portable-net45+wp80+win+wpa81\Plugin.Permissions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Permissions.Abstractions, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plugin.Permissions.1.2.1\lib\portable-net45+wp80+win+wpa81\Plugin.Permissions.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Settings, Version=2.5.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugins.Settings.2.5.8\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Settings.Abstractions, Version=2.5.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugins.Settings.2.5.8\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Share, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plugin.Share.5.0.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Share.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Share.Abstractions, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plugin.Share.5.0.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Share.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Refractored.XamForms.PullToRefresh, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Refractored.XamForms.PullToRefresh.1.1.0\lib\portable-net45+wp80+win8+wpa81\Refractored.XamForms.PullToRefresh.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rg.Plugins.Popup.1.0.4\lib\portable-win+net45+wp8+win8+wpa81\Rg.Plugins.Popup.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rg.Plugins.Popup.1.0.4\lib\portable-win+net45+wp8+win8+wpa81\Rg.Plugins.Popup.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite-net, Version=1.4.118.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlite-net-pcl.1.4.118\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.5\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.batteries_green.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.5\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.1.5\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.Forms.CarouselView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.CarouselView.2.3.0-pre2\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.CarouselView.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.270\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Maps, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.Maps.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10\Xamarin.Forms.Maps.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.270\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.270\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.iOS">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Xamarin.iOS\v1.0\Xamarin.iOS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\fingerprint_green.png" />
+    <EmbeddedResource Include="Images\fingerprint_red.png" />
+    <EmbeddedResource Include="Pages\MasterMenu\MenuPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>MenuPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\iOS\AboutPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>AboutPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\error.png">
+      <DeployService-Deploy>True</DeployService-Deploy>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\star_outline.png">
+      <DeployService-Deploy>True</DeployService-Deploy>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\star_selected.png">
+      <DeployService-Deploy>True</DeployService-Deploy>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\success.png">
+      <DeployService-Deploy>True</DeployService-Deploy>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Lockers\LockersPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>LockersPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <None Include="Pages\Lockers\FilterLockersPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>FilterSessionsPage.xaml</LogicalName>
+    </None>
+    <EmbeddedResource Include="Pages\Lockers\LockerDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>LockerDetailsPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cells\LockerCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>SessionCell.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cells\CategoryCellView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>CategoryCellView.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\News\NewsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>SponsorsPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\News\NewsDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>SponsorDetailsPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Events\EventsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>EventsPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Info\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>LoginPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Info\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>SettingsPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Info\WiFiInformationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>WiFiInformationPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Info\CodeOfConductPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>CodeOfConductPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Info\VenuePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>VenuePage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\MiniHacks\MiniHacksPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>MiniHacksPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Events\EventDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>EventDetailsPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LabelSection.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>LabelSection.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SectionDivider.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>SectionDivider.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>App.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cells\EvolveGroupHeaderView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>EvolveGroupHeaderView.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\HeaderDivider.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>HeaderDivider.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FooterDivider.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>FooterDivider.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cells\TweetCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>TweetCell.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Home\FeedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>FeedPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Home\TweetImagePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>TweetImagePage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Home\NotificationsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>NotificationsPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Info\ConferenceInformationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>ConferenceInformationPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cells\NewsCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>SponsorCell.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cells\NotificationCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>NotificationCell.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Common\FeedbackPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>FeedbackPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cells\MiniHackCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>MiniHackCell.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\MiniHacks\MiniHacksDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>MiniHacksDetailsPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Lockers\EvaluationsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>EvaluationsPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Info\FloorMapPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>FloorMapPage.xaml</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Windows\MenuPageUWP.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Cells\FloorMapCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Info\FloorMapsCarouselPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sealegs.Clients.Portable\Sealegs.Clients.Portable.csproj">
+      <Project>{434442f3-9af2-4a19-9151-efbd731bd367}</Project>
+      <Name>Sealegs.Clients.Portable</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sealegs.DataStore.Abstractions\Sealegs.DataStore.Abstractions.csproj">
+      <Project>{50542ac8-cd37-4e51-b946-b85049d6ec11}</Project>
+      <Name>Sealegs.DataStore.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sealegs.DataStore.Azure\Sealegs.DataStore.Azure.csproj">
+      <Project>{5087b261-9d0f-457d-ad9e-b018248f1b16}</Project>
+      <Name>Sealegs.DataStore.Azure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sealegs.DataStore.Mock\Sealegs.DataStore.Mock.csproj">
+      <Project>{4DF18ED7-0E19-4866-8D9B-B1CB5C86A366}</Project>
+      <Name>Sealegs.DataStore.Mock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sealegs.Utils\Sealegs.Utils.csproj">
+      <Project>{dfa0f0f6-c396-412e-86a9-e9095f71cc36}</Project>
+      <Name>Sealegs.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Employees\Employees.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Employees\AddEmployee.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Locker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Lockers\AddEditLockerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Wine\WineDetailsPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Wine\WinesCarouselPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Wine\CheckOutPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Wine\WineCart.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Wine\CheckOutFinal.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Wine\AddWinePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Cells\WineCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>
+      </SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\wine.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Employee_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Wine\Signature.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Events\EventsManagementPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>
+      </SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Events\AddEditEventPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\News\NewsManagmentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\News\AddEditNewspage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Notifications\NotificationsManagment.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Notifications\AddEditNotifications.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Support\ContactUs.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\MasterMenu\Master.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Test\TestPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Profile\Profile.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Support\AboutUs.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Wine\Wines.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Wine\RemoteChillRequestPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Wine\WinesCardViewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\PopUp\RatingBarPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Evaluation\WineEvaluation.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\profile_generic_big.png" />
+  </ItemGroup>
+  <Import Project="..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets'))" />
+  </Target>
+</Project>

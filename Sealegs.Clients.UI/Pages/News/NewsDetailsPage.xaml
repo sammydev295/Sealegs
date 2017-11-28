@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="Sealegs.Clients.UI.NewsDetailsPage"
+    xmlns:local="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+    xmlns:toolkit="clr-namespace:FormsToolkit;assembly=FormsToolkit"
+    Title="News Details"
+    BackgroundColor="{DynamicResource WindowBackgroundTable}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:HasDataConverter x:Key="GenericIsVisibleConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.3*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Aspect="AspectFill" HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand">
+            <Image.Source>
+                <UriImageSource Uri="{Binding NewsImageUri}" 
+                                CacheValidity="4" 
+                                CachingEnabled="true"/>
+            </Image.Source>
+        </Image>
+        <Label Grid.Row="0" Text="{Binding Name}" TextColor="White" FontSize="20" FontAttributes="Bold"
+               HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand" Margin="20,5"/>
+
+        <StackLayout Grid.Row="1" Spacing="0">
+            <Label Text="{Binding Description}"  Style="{DynamicResource EvolveListItemTextStyle}"
+                   StyleId="NewsDetailDescription" Margin="10"/>
+
+            <!--<local:LabelSection Text="Links" BackgroundColor="#7635eb" HeightRequest="50" />-->
+            <Label HeightRequest="50" HorizontalOptions="FillAndExpand" TextColor="White" BackgroundColor="#7635eb"
+                   Text="Links" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="20"/>
+            <local:HeaderDivider/>
+            <local:NonScrollableListView 
+                ItemsSource="{Binding FollowItems}" 
+                VerticalOptions="Start" 
+                x:Name="ListViewFollow"
+                SelectedItem="{Binding SelectedFollowItem, Mode=TwoWay}"
+                StyleId="NewsDetailLinks"
+                RowHeight="44"
+                ItemSelected="ListViewFollow_OnItemSelected">
+                <local:NonScrollableListView.SeparatorColor>
+                    <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
+                </local:NonScrollableListView.SeparatorColor>
+                <local:NonScrollableListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell StyleId="disclosure">
+                            <Grid ColumnSpacing="{StaticResource StandardSpacing}">
+                                <Grid.Padding>
+                                    <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
+                                </Grid.Padding>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image VerticalOptions="Center" Source="{Binding Icon}">
+                                    <Image.IsVisible>
+                                        <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
+                                    </Image.IsVisible>
+                                </Image>
+                                <Label Grid.Column="1" VerticalOptions="Center"  Style="{DynamicResource EvolveListItemTextStyle}" Text="{Binding Name}"/>
+                                <Label Grid.Column="2" 
+                                       VerticalOptions="Center"  
+                                       Style="{DynamicResource EvolveListItemTextStyle}" 
+                                       TextColor="{DynamicResource DetailTextColor}" 
+                                       Text="{Binding Subtitle}">
+                                    <Label.IsVisible>
+                                        <OnPlatform x:TypeArguments="x:Boolean" iOS="true" Android="false"/>
+                                    </Label.IsVisible>
+                                </Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </local:NonScrollableListView.ItemTemplate>
+            </local:NonScrollableListView>
+            <local:FooterDivider/>
+        </StackLayout>
+
+    </Grid>
+    <!--<local:AlwaysScrollView>
+        <StackLayout Spacing="0">
+            <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}"
+                             Spacing="{DynamicResource CardSpacing}"
+                            
+                         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+          
+                --><!--<local:CardView>
+            <StackLayout Padding="0" Spacing="0" BackgroundColor="White">
+                <local:HeaderDivider/>
+                    <StackLayout Padding="{StaticResource StandardPadding}" >
+                            <StackLayout Padding="32,16,32,0">
+                            <Image HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                Aspect="AspectFit"
+                                StyleId="NewsDetailImage"
+                                HeightRequest="150">
+                                <Image.Source>
+                                    <UriImageSource Uri="{Binding NewsImageUri}" 
+                                        CacheValidity="4" 
+                                        CachingEnabled="true"/>
+                                </Image.Source>
+                            </Image>
+                            </StackLayout>
+                            <StackLayout Spacing="0">
+                              <Label Text="{Binding Name}" Style="{DynamicResource EvolveListItemTextStyle}" StyleId="NewsDetailName"/>
+                              -->
+                <!--<Label Text="{Binding News.NewsLevel.Name, StringFormat='{0} News'}" Style="{DynamicResource EvolveListItemDetailTextStyle}" StyleId="NewsDetailLevel"/>-->
+                <!--
+                            </StackLayout>
+                            <StackLayout Padding="0,16">
+                                <Label Text="{Binding Description}"  Style="{DynamicResource EvolveListItemTextStyle}" StyleId="NewsDetailDescription"/>
+                            </StackLayout>
+                    </StackLayout>
+                <local:FooterDivider/>
+            </StackLayout>
+            </local:CardView>
+            <local:CardView >
+                <StackLayout Spacing="0">
+                    <local:LabelSection Text="Links"/>
+                    <local:HeaderDivider/>
+                    <local:NonScrollableListView 
+                        ItemsSource="{Binding FollowItems}" 
+                        VerticalOptions="Start" 
+                        x:Name="ListViewFollow"
+                        SelectedItem="{Binding SelectedFollowItem, Mode=TwoWay}"
+                        StyleId="NewsDetailLinks"
+                        RowHeight="44"
+                        ItemSelected="ListViewFollow_OnItemSelected">
+                        <local:NonScrollableListView.SeparatorColor>
+                            <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}"/>
+                        </local:NonScrollableListView.SeparatorColor>
+                        <local:NonScrollableListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell StyleId="disclosure">
+                                    <Grid ColumnSpacing="{StaticResource StandardSpacing}">
+                                        <Grid.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness" iOS="0,12" Android="16,8"/>
+                                        </Grid.Padding>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image VerticalOptions="Center" Source="{Binding Icon}">
+                                            <Image.IsVisible>
+                                                <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
+                                            </Image.IsVisible>
+                                        </Image>
+                                        <Label Grid.Column="1" VerticalOptions="Center"  Style="{DynamicResource EvolveListItemTextStyle}" Text="{Binding Name}"/>
+                                        <Label Grid.Column="2" 
+                                               VerticalOptions="Center"  
+                                               Style="{DynamicResource EvolveListItemTextStyle}" 
+                                               TextColor="{DynamicResource DetailTextColor}" 
+                                               Text="{Binding Subtitle}">
+                                            <Label.IsVisible>
+                                                <OnPlatform x:TypeArguments="x:Boolean" iOS="true" Android="false"/>
+                                            </Label.IsVisible>
+                                        </Label>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </local:NonScrollableListView.ItemTemplate>
+                    </local:NonScrollableListView>
+                    <local:FooterDivider/>
+                </StackLayout>
+            </local:CardView>--><!--
+
+
+            </StackLayout>
+        </StackLayout>
+    </local:AlwaysScrollView>-->
+</ContentPage>

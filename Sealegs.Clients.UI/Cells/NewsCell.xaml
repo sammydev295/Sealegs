@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+    x:Class="Sealegs.Clients.UI.NewsCell">
+    <StackLayout Spacing="0" HeightRequest="120">
+		<StackLayout.Padding>
+            <OnPlatform x:TypeArguments="Thickness" iOS="0" Android="0,4" WinPhone="0"/>
+        </StackLayout.Padding>
+    	<local:CardView HeightRequest="120">
+            <Grid  ColumnSpacing="16" BackgroundColor="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image  Source="{Binding ImageUrl}" HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" StyleId="NewsImage" Aspect="AspectFit">
+                </Image>
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Grid.Column="1" Spacing="0">
+                      <Label Text="{Binding Name}" TextColor="Gray" FontAttributes="Bold" FontSize="15"/>
+                    <Label Text="{Binding Description, StringFormat='{0} News'}" TextColor="Gray" FontAttributes="Italic"/>
+                    </StackLayout>
+             
+            </Grid>
+        </local:CardView>
+	</StackLayout>
+</ContentView>

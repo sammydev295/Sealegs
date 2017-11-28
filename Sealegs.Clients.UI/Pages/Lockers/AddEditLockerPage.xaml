@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"    
+    xmlns:formsToolkit="clr-namespace:FormsToolkit;assembly=FormsToolkit"
+    xmlns:imagecircle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"    
+    xmlns:picker="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+    xmlns:controls="clr-namespace:Sealegs.Clients.UI.Controls;assembly=Sealegs.Clients.UI"
+    xmlns:local="clr-namespace:Sealegs.Clients.UI.Behaviours;assembly=Sealegs.Clients.UI"
+    x:Class="Sealegs.Clients.UI.AddEditLockerPage"
+    Title="{Binding PageName}"
+    Icon="Locker.png"
+    NavigationPage.BackButtonTitle="Info"
+    BackgroundColor="{x:DynamicResource WindowBackgroundTable}">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView Orientation="Vertical">
+                <StackLayout Padding="5">
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                        <ActivityIndicator.Color>
+                            <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                        </ActivityIndicator.Color>
+                    </ActivityIndicator>
+                    <Label Text="Updating Locker..." HorizontalOptions="Center" IsVisible="{Binding IsBusy}" Style="{x:DynamicResource EvolveListItemTextStyle}"/>
+                    
+                    <StackLayout Spacing="0" BackgroundColor="Gray">
+                        <Label Text="Basic Details" Style="{StaticResource ProfileHeaderLabelStyle}" />
+                    </StackLayout>
+
+                    <!--Member Name-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.MemberName}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start"  Placeholder="Member Name"
+                                StyleId="MemberNameTextField" IsEnabled="{Binding IsNotBusy}" 
+                                BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}">
+                        <Entry.Behaviors>
+                            <local:MinMaxLengthValidatorBehavior MinLength="10" MaxLength="100"/>
+                        </Entry.Behaviors>
+                    </formsToolkit:EntryLine>
+                    <!--Display Name-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.DisplayName}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Display Name"
+                                StyleId="DisplayNameTextField" IsEnabled="{Binding IsNotBusy}"
+                                BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}">
+                        <Entry.Behaviors>
+                            <local:MinMaxLengthValidatorBehavior MinLength="10" MaxLength="100"/>
+                        </Entry.Behaviors>
+                    </formsToolkit:EntryLine>
+                    <!--Email Address-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.EmailAddress}" HorizontalOptions="FillAndExpand" 
+                                HorizontalTextAlignment="Start" Placeholder="Email Address" StyleId="EmailAddressTextField"
+                                IsEnabled="{Binding IsEmailEnabled}" BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}">
+                        <Entry.Behaviors>
+                            <local:EmailValidatorBehavior />
+                        </Entry.Behaviors>
+                    </formsToolkit:EntryLine>
+                    <!--Mobile-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.Mobile}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Mobile"
+                                StyleId="MobileTextField" IsEnabled="{Binding IsNotBusy}"
+                                BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}"/>
+                    <!--Password-->
+                    <formsToolkit:EntryLine Text="{Binding Password}" HorizontalOptions="FillAndExpand" x:Name="txtPassword"
+                                IsPassword="true" HorizontalTextAlignment="Start"
+                                Placeholder="Password" StyleId="PasswordTextField" IsVisible="{Binding IsPasswordEnabled}"
+                                IsEnabled="{Binding IsPasswordEnabled}" BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}">
+                        <Entry.Behaviors>
+                            <local:PasswordValidationBehavior />
+                        </Entry.Behaviors>
+                    </formsToolkit:EntryLine>
+                    <!--Confirm Password-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.ConfirmPassword}" HorizontalOptions="FillAndExpand"
+                                IsPassword="true" HorizontalTextAlignment="Start" Placeholder="Confirm Password"
+                                StyleId="ConfirmPasswordTextField" IsEnabled="{Binding IsPasswordEnabled}"
+                                BorderColor="#ECECEC" IsVisible="{Binding IsPasswordEnabled}" Style="{StaticResource ProfileEntryStyle}">
+                        <Entry.Behaviors>
+                            <local:PasswordValidationBehavior />
+                            <local:CompareValidationBehavior BindingContext="{x:Reference txtPassword}" Text="{Binding Text}"/>
+                        </Entry.Behaviors>
+                    </formsToolkit:EntryLine>
+
+                    <StackLayout Spacing="0" BackgroundColor="Gray">
+                        <Label  Text="Address" Style="{StaticResource ProfileHeaderLabelStyle}" />
+                    </StackLayout>
+
+                    <!--Street-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.Street}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Street" StyleId="StreetTextField"
+                                IsEnabled="{Binding IsNotBusy}" BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}"/>
+                    <!--City-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.City}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="City"
+                                StyleId="CityTextField" IsEnabled="{Binding IsNotBusy}" BorderColor="#ECECEC"
+                                        Style="{StaticResource ProfileEntryStyle}"/>
+                    <!--State-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.State}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="State"
+                                StyleId="StateTextField" IsEnabled="{Binding IsNotBusy}"
+                                BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}"/>
+                    <!--ZipCode-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.ZipCode}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Zip Code"
+                                StyleId="ZipCodeTextField" IsEnabled="{Binding IsNotBusy}"
+                                BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}"/>
+
+                    <StackLayout Spacing="0" BackgroundColor="Gray">
+                        <Label Text="Contact Details" Style="{StaticResource ProfileHeaderLabelStyle}" />
+                    </StackLayout>
+
+                    <!--Home Phone-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.HomePhone}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Home Phone"
+                                StyleId="HomePhoneTextField" IsEnabled="{Binding IsNotBusy}"
+                                BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}"/>
+                    <!--Work Phone-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.WorkPhone}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Work Phone"
+                                StyleId="WorkPhoneTextField" IsEnabled="{Binding IsNotBusy}"
+                                BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}"/>
+
+                    <StackLayout Spacing="0" BackgroundColor="Gray">
+                        <Label  Text="Lockers" Style="{StaticResource ProfileHeaderLabelStyle}" />
+                    </StackLayout>
+                    
+                    <!--Locker Type-->
+                    <Picker ItemsSource="{Binding AllLockerTypes}" ItemDisplayBinding="{Binding LockerTypeName}" SelectedItem="{Binding SelectedLockerType}" Title="Select Locker Type" HeightRequest="40"/>
+                    <!--Locker Image-->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center"  VerticalOptions="Center">
+                        <imagecircle:CircleImage VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                                     HeightRequest="24" Source="{Binding Locker.LockerImageUri}"/>
+                        <!--FillColor="{Binding MainCategory.Color, Converter={StaticResource StringToColorConverter}}"-->
+                        <Label Text="Locker Avatar can be set from the Locker Details Page!" HeightRequest="15" TextColor="{StaticResource Primary}"/>
+                    </StackLayout>
+
+                    <StackLayout Spacing="0" BackgroundColor="Gray">
+                        <Label  Text="Cards" Style="{StaticResource ProfileHeaderLabelStyle}" />
+                    </StackLayout>
+                    <!--Card Type-->
+                    <Picker ItemsSource="{Binding AllCreditCardTypes}" Title="Select Credit Card Type" HeightRequest="40" />
+                    <!--Credit Card Number-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.CreditCardNumber}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Credit Card Number"
+                                StyleId="CreditCardNumberTextField" IsEnabled="{Binding IsNotBusy}"
+                                BorderColor="#ECECEC" Keyboard="Telephone" Style="{StaticResource ProfileEntryStyle}"/>
+                    <!--Name On Card-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.NameOnCard}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Name On Card"
+                                StyleId="NameOnCardTextField" IsEnabled="{Binding IsNotBusy}"
+                                BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}"/>
+                    <!--Card Expiry-->
+                    <formsToolkit:EntryLine x:Name="EntryLineCard" Placeholder="Card Expiry Year/Month"  Style="{StaticResource ProfileEntryStyle}"/>
+                    <DatePicker x:Name="DatePickerCard" Format="yyyy-MM" IsEnabled="False" IsVisible="False" />
+
+                    <StackLayout Spacing="0" BackgroundColor="Gray">
+                        <Label  Text="Social Media" Style="{StaticResource ProfileHeaderLabelStyle}" />
+                    </StackLayout>
+
+                    <!--Twitter ID-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.TwitterID}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Twitter ID"
+                                StyleId="TwitterIDTextField" IsEnabled="{Binding IsNotBusy}"
+                                BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}"/>
+                    <!--Facebook ID-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.FacebookID}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Facebook ID"
+                                StyleId="FacebookIDTextField" IsEnabled="{Binding IsNotBusy}"
+                                BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}"/>
+                    <!--Notes-->
+                    <formsToolkit:EntryLine Text="{Binding Locker.Notes}" HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" Placeholder="Notes"
+                                StyleId="NotesTextField"  IsEnabled="{Binding IsNotBusy}"
+                                BorderColor="#ECECEC" Style="{StaticResource ProfileEntryStyle}"/>
+
+                    <!--Check Boxes Grid-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Switch IsToggled="{Binding Locker.PromotionsToggle}" Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="Promotions" Grid.Row="0" Grid.Column="1"/>
+
+                        <Switch IsToggled="{Binding Locker.EmailAlertsToggle}" Grid.Row="1" Grid.Column="0"/>
+                        <Label Text="Email Alerts" Grid.Row="1" Grid.Column="1"/>
+
+                        <Switch IsToggled="{Binding Locker.InventoryToggle}" Grid.Row="2" Grid.Column="0"/>
+                        <Label Text="Inventory Alerts" Grid.Row="2" Grid.Column="1"/>
+                    </Grid>
+
+                    <!--Buttons-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button HeightRequest="45" Margin="10" Grid.Column="0" TextColor="White"
+                  Text="{Binding ButtonName}" BackgroundColor="#7635EB" Command="{Binding SaveLockerCommand}"></Button>
+                        <Button HeightRequest="45" Margin="10" Grid.Column="1" TextColor="White"
+                  Text="Cancel" BackgroundColor="#7635EB" Command="{Binding CancelCommand}"></Button>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+    </pages:PopupPage>

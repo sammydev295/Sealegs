@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:local="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             xmlns:formsToolkit="clr-namespace:FormsToolkit;assembly=FormsToolkit"
+             xmlns:pickerex="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Sealegs.Clients.UI.Pages.Wine.AddWinePage"
+             Title="{Binding PageTitle}"
+             BackgroundColor="{x:DynamicResource WindowBackgroundTable}">
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ScrollView Orientation="Vertical" AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout Margin="15,5">
+                    <!--Wine Title -->
+                    <formsToolkit:EntryLine Text="{Binding Wine.WineTitle}" HorizontalOptions="FillAndExpand"
+                                      HorizontalTextAlignment="Start" Placeholder="Wine Title" BorderColor="#ECECEC"/>
+
+                    <!--Vintage-->
+                    <Picker x:Name="WinesVintagePicker" ItemsSource="{Binding VintageList}" SelectedItem="{Binding Wine.Vintage}" Title="Select Vintage"/>
+
+                    <!--Wine Varietal-->
+                    <Picker x:Name="WineVarietalPicker" ItemsSource="{Binding WineVarietals}" ItemDisplayBinding="{Binding VarietalName}" SelectedItem="{Binding SelectedVarietal}" Title="Select Wine Varietal" />
+
+                    <!--Bottle Size-->
+                    <Picker x:Name="WineBottleSizePicker" ItemsSource="{Binding BottleSizeList}" SelectedItem="{Binding Wine.BottleSize}" Title="Select Bottle Size"/>
+
+                    <!--Special Occassion-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Switch IsToggled="{Binding Wine.SpecialOccassion}" x:Name="specialOccassionToggleButton" Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="Special Occassion" Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                    <!--OccassionDescription-->
+                    <formsToolkit:EntryLine Text="{Binding Wine.SpecialOccassionDescription}" HorizontalOptions="FillAndExpand" x:Name="specialOccassionEntryLine" 
+                                      HorizontalTextAlignment="Start" Placeholder="Occassion Description" BorderColor="#ECECEC"
+                                      IsVisible="{Binding Wine.SpecialOccassion}"/>
+                    <!--Quantity-->
+                    <formsToolkit:EntryLine Text="{Binding Wine.Quantity}" Keyboard="Telephone" HorizontalOptions="FillAndExpand"
+                                      HorizontalTextAlignment="Start" Placeholder="Quantity" BorderColor="#ECECEC"/>
+
+                    <!--Image-->
+                    <StackLayout Margin="10,10,10,10" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Switch IsToggled="{Binding OCRTextAlso, Mode=TwoWay}" Grid.Row="0" Grid.Column="0" />
+                            <Label Text="Capture Label Text With Picture (touch picture area below)" Grid.Row="0" Grid.Column="1" FontSize="12" />
+                        </Grid>
+
+                        <forms:CachedImage BackgroundColor="White" Source="{Binding Wine.ImagePath}" HeightRequest="200" x:Name="ImagePath" 
+                                       DownsampleHeight="200" DownsampleUseDipUnits="false" CacheDuration="30"  DownsampleToViewSize="True"
+                                       RetryCount="0" RetryDelay="250" TransparencyEnabled="False"
+                                       AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                       AbsoluteLayout.LayoutFlags="All" >
+                            <forms:CachedImage.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AddImageCommand}"/>
+                            </forms:CachedImage.GestureRecognizers>
+                        </forms:CachedImage>
+                        <Label Text="{Binding Wine.Notes}" FontSize="16" TextColor="Black"
+                        AbsoluteLayout.LayoutBounds=".5,.5,100,30"
+                        AbsoluteLayout.LayoutFlags="XProportional,YProportional" >
+                        </Label>
+                    </StackLayout>
+
+                    <!--Buttons-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button HeightRequest="45" Margin="10" Grid.Column="0" TextColor="White"
+                          Text="{Binding ButtonName}" BackgroundColor="#7635EB" Command="{Binding AddCommand}"></Button>
+                        <Button HeightRequest="45" Margin="10" Grid.Column="1" TextColor="White"
+                        Text="Cancel" BackgroundColor="#7635EB" Clicked="Cancel_OnClicked"></Button>
+                    </Grid>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                        <ActivityIndicator.Color>
+                            <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                        </ActivityIndicator.Color>
+                    </ActivityIndicator>
+                    <Label Text="Processing ..." HorizontalOptions="Center" Style="{x:DynamicResource EvolveListItemTextStyle}" IsVisible="{Binding IsBusy}"/>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout IsVisible="{Binding IsBusy}"
+                   AbsoluteLayout.LayoutFlags="PositionProportional"
+                   AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                <StackLayout.Orientation>
+                    <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+                </StackLayout.Orientation>
+                <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                    <ActivityIndicator.Color>
+                        <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                    </ActivityIndicator.Color>
+                </ActivityIndicator>
+                <Label Text="Loading ..." HorizontalOptions="Center" Style="{x:DynamicResource EvolveListItemTextStyle}"/>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</pages:PopupPage>

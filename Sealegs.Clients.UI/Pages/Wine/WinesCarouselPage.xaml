@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ui="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             xmlns:local="clr-namespace:Sealegs.Clients.UI;assembly=Sealegs.Clients.UI"
+             xmlns:toolkit="clr-namespace:FormsToolkit;assembly=FormsToolkit"
+             xmlns:xfControls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             xmlns:forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             Title="{Binding PageTitle}"
+             x:Class="Sealegs.Clients.UI.Pages.Wine.WinesCarouselPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:IsFavoriteDetailTextConverter x:Key="IsFavoriteDetailTextConverter" />
+            <local:IsFilledIconConverter x:Key="IsFilledIconConverter" />
+            <local:RatingVisibleConverter x:Key="RatingVisibleConverter" />
+            <toolkit:InvertedBooleanConverter x:Key="InvertedBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="NotCheckedOutOnly" Icon="winebag.png" Text="Available For Checkout" Command="{Binding FilterNotCheckedOutCommand}" />
+        <ToolbarItem x:Name="CheckedOutOnly" Icon="winebottle.png" Text="Checked Out Only" Command="{Binding FilterCheckedOutCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+
+        <AbsoluteLayout>
+
+            <forms:CarouselView x:Name="WineCarousel" ItemsSource="{Binding WinesCarousel}" 
+                                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                 AbsoluteLayout.LayoutFlags="All"  
+                                AbsoluteLayout.LayoutBounds="0,0,1,1" Item="{Binding SelectedCarouselItem}">
+                <forms:CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <local:CardView CornerRadius="5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Image  Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Source="{Binding ImagePath}"/>
+                                <StackLayout Grid.Row="1"  Padding="12">
+                                    <Label TextColor="Gray" Text="{Binding WineTitle}" FontSize="20" 
+                                           FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding Vintage, StringFormat='Vintage: {0}'}" TextColor="Gray" FontSize="20" HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding CheckedInDate, StringFormat='Checked In: {0}'}" TextColor="Gray"  HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding CheckedOutDate, StringFormat='Checked Out: {0}'}" TextColor="Gray"  HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding BottleSize, StringFormat='Bottle Size: {0}'}" TextColor="Gray"  HorizontalOptions="CenterAndExpand"/>
+                                    <Button Text="Edit" TextColor="White" BackgroundColor="{StaticResource Primary}" Clicked="EditWine" />
+                                    <Button Text="Delete" TextColor="White" BackgroundColor="{StaticResource Primary}" Clicked="DeleteWine" />
+                                </StackLayout>
+                            </Grid>
+                        </local:CardView>
+                    </DataTemplate>
+                </forms:CarouselView.ItemTemplate>
+            </forms:CarouselView>
+            <StackLayout IsVisible="{Binding NoWinesFound}"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   AbsoluteLayout.LayoutFlags="All"
+                   AbsoluteLayout.LayoutBounds="0,0,1,1"
+                   BackgroundColor="{x:DynamicResource WindowBackground}"
+                   Padding="16,0">
+                <Label Text="{Binding NoWinesFoundMessage}" HorizontalOptions="Center"
+               HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"
+               FontSize="22" TextColor="#D3D2D2"/>
+            </StackLayout>
+        </AbsoluteLayout>
+
+    </ContentPage.Content>
+</ContentPage>
